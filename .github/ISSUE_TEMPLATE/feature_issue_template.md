@@ -1,5 +1,5 @@
 ---
-name: feature_request_template
+name: feature_issue_template
 about: 기능 구현을 위한 이슈 생성
 title: 기능 구현
 labels: enhancement
