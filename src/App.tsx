@@ -9,7 +9,6 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-<<<<<<< HEAD
     <div className="h-screen flex flex-col justify-center items-center">
       <div className="text-center">
         <img className="size-50" src={logo}></img>
@@ -17,11 +16,6 @@ function App() {
         <p className="text-sm text-gray-500">
           할 일을 작성하고 매일을 기록해보세요.
         </p>
-=======
-    <>
-      <div>
-        <p className="text-red-100">DEV 브랜치</p>
->>>>>>> origin/dev
       </div>
       <div className="flex flex-col m-3">
         <button
