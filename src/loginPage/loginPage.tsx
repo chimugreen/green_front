@@ -2,7 +2,7 @@ import React from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   return (
     <div className="mx-auto my-2 max-w-180 flex flex-col p-3">
@@ -51,4 +51,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
