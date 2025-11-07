@@ -2,7 +2,7 @@ import React from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const SignupPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -61,4 +61,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupPage;

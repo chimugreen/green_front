@@ -2,7 +2,7 @@ import React from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   return (
     <div className="mx-auto my-2 max-w-180 flex flex-col p-3">
@@ -34,6 +34,12 @@ const Login = () => {
         <button
           type="submit"
           className="bg-black text-white w-fit rounded-full p-3.5 px-6 m-4 text-sm font-bold hover:cursor-pointer"
+          // onClick => 버튼 클릭시 발생하는 이벤트 처리
+          // callBack 함수 {() => {안에 있는 함수 실행}}
+          onClick={() => {
+            localStorage.setItem('pageChange', 'true'); // ✅ 로그인 상태 저장
+            navigate('/'); // ✅ 메인으로 이동
+          }}
         >
           확인
         </button>
@@ -45,4 +51,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
