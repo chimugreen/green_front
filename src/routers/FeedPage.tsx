@@ -13,7 +13,9 @@ const FeedPage = () => {
           <CalenderDaily />
           {/* 임시 구분 선 */}
           <hr />
-          <CalenderCell />
+          <div className="cursor-pointer">
+            <CalenderCell />
+          </div>
         </div>{' '}
         <div className="w-1/3 flex border-2">
           <p>카테고리 컴포넌트 영역</p>
