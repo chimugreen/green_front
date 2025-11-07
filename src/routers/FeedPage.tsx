@@ -1,7 +1,6 @@
 // 피드 page
 
 import CalenderCell from '../components/CalenderCell';
-import CalenderDaily from '../components/CalenderDaily';
 
 const FeedPage = () => {
   return (
@@ -10,9 +9,6 @@ const FeedPage = () => {
       <hr />
       <div className="flex justify-around items-center h-screen ">
         <div className="w-1/3 flex flex-col border-2">
-          <CalenderDaily />
-          {/* 임시 구분 선 */}
-          <hr />
           <div className="cursor-pointer">
             <CalenderCell />
           </div>

@@ -35,6 +35,27 @@ const CalenderCell = () => {
 
   return (
     <>
+      <div className="flex justify-between">
+        <div>달력 바뀌면 날짜 바뀌는 부분</div>
+        <div className="flex gap-2 m-1">
+          <button>날짜이동</button>
+          <button> 버튼</button>
+        </div>
+      </div>
+      {/* 구분선 */}
+      <hr />
+      <div>
+        <ul className="flex justify-around text-sm">
+          <li>월</li>
+          <li>화</li>
+          <li>수</li>
+          <li>목</li>
+          <li>금</li>
+          <li className="text-blue-400">토</li>
+          <li className="text-red-400">일</li>
+        </ul>
+      </div>
+      <hr />
       <div>
         <div className="flex flex-col text-center">
           <div className="grid grid-cols-7 mt-2 mb-2">
