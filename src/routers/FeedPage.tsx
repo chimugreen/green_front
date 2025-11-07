@@ -9,7 +9,7 @@ const FeedPage = () => {
       <hr />
       <div className="flex justify-around items-center h-screen ">
         <div className="w-1/3 flex flex-col border-2">
-          <div className="cursor-pointer">
+          <div>
             <CalenderCell />
           </div>
         </div>{' '}

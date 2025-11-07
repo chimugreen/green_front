@@ -31,15 +31,23 @@ const CalenderCell = () => {
   // 요일과 날짜 셀간의 순서 맞춤 위함
   const calenderDate2 = Array(firstDay).fill(null).concat(calenderDate1);
 
-  // const date1 = [1, 2, 3, 4, 5, 6, 7];
+  // 온클릭 이벤트 test
+  const testOnClick = () => {
+    alert('버튼 테스트');
+  };
 
   return (
     <>
       <div className="flex justify-between">
-        <div>달력 바뀌면 날짜 바뀌는 부분</div>
-        <div className="flex gap-2 m-1">
-          <button>날짜이동</button>
-          <button> 버튼</button>
+        {/* 해당 버튼 클릭 시, 오늘 날짜로 변동 */}
+        <div className="m-1">달력 바뀌면 날짜 바뀌는 부분</div>
+        <div className="flex gap-2 m-1 border-2">
+          <button onClick={testOnClick} className="cursor-pointer">
+            ◁
+          </button>
+          <button onClick={testOnClick} className="cursor-pointer">
+            ▷
+          </button>
         </div>
       </div>
       {/* 구분선 */}
@@ -65,15 +73,17 @@ const CalenderCell = () => {
             {/* <div />(<div><div/>) => 구역은 있지만 아무것도 없는 것으로 보이게함 */}
             {calenderDate2.map((day, index) =>
               day ? (
-                <div
+                <button
                   key={index}
-                  className="flex flex-col items-center justify-center"
+                  onClick={testOnClick}
+                  className="flex flex-col items-center justify-center
+                  m-1 p-1 rounded-2xl cursor-pointer"
                 >
                   <span>
                     <HiCalendar />
                   </span>
-                  <div className="m-2">{day}</div>
-                </div>
+                  <div className="m-1">{day}</div>
+                </button>
               ) : (
                 <div key={index} />
               )
