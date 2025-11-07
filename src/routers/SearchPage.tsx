@@ -1,6 +1,6 @@
 //둘러보기 - 탐색
 
-const Search = () => {
+const SearchPage = () => {
   return (
     <>
       <div>탐색 page</div>
@@ -8,4 +8,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

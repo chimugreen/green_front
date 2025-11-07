@@ -1,11 +1,11 @@
 // 메인 페이지
-import Feed from './Feed';
+import FeedPage from './FeedPage';
+import MyPage from './MyPage';
+import SearchPage from './SearchPage';
+import AlertPage from './AlertPage';
 import { VscAccount, VscSearch, VscBell } from 'react-icons/vsc';
 import { IoHomeOutline } from 'react-icons/io5';
 import { useState } from 'react';
-import MyPage from './MyPage';
-import Search from './Search';
-import Alert from './Alert';
 
 const MainPage = () => {
   // 타입스크립트이기 때문에 useState()에서 ()에 들어갈 변수에 대한 타입을 지정해야됨 => String 지정
@@ -21,10 +21,10 @@ const MainPage = () => {
         </Routes> */}
 
         {/* pageChange가 ''면 뒤에 링크를 보여주는 조건부 문법*/}
-        {pageChange === 'Feed' && <Feed />}
+        {pageChange === 'Feed' && <FeedPage />}
         {pageChange === 'My' && <MyPage />}
-        {pageChange === 'Alert' && <Alert />}
-        {pageChange === 'Search' && <Search />}
+        {pageChange === 'Alert' && <AlertPage />}
+        {pageChange === 'Search' && <SearchPage />}
       </div>
       <footer className="absolute bottom-3 w-full overflow-hidden">
         {/* 하단 페이지 이동 */}

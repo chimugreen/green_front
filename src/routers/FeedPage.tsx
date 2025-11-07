@@ -1,6 +1,6 @@
 // 피드 page
 
-const Feed = () => {
+const FeedPage = () => {
   return (
     <>
       <div>피드페이지</div>
@@ -8,4 +8,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default FeedPage;

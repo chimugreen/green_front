@@ -1,6 +1,6 @@
 // 알림 page
 
-const Alert = () => {
+const AlertPage = () => {
   return (
     <>
       <div>알림페이지</div>
@@ -8,4 +8,4 @@ const Alert = () => {
   );
 };
 
-export default Alert;
+export default AlertPage;
