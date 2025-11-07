@@ -3,7 +3,7 @@ import Feed from './Feed';
 import { VscAccount, VscSearch, VscBell } from 'react-icons/vsc';
 import { IoHomeOutline } from 'react-icons/io5';
 import { useState } from 'react';
-import My from './My';
+import MyPage from './MyPage';
 import Search from './Search';
 import Alert from './Alert';
 
@@ -22,7 +22,7 @@ const MainPage = () => {
 
         {/* pageChange가 ''면 뒤에 링크를 보여주는 조건부 문법*/}
         {pageChange === 'Feed' && <Feed />}
-        {pageChange === 'My' && <My />}
+        {pageChange === 'My' && <MyPage />}
         {pageChange === 'Alert' && <Alert />}
         {pageChange === 'Search' && <Search />}
       </div>

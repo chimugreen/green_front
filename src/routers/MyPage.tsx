@@ -1,7 +1,7 @@
 // My 페이지
 // import { VscSettingsGear } from 'react-icons/vsc';
 
-const My = () => {
+const MyPage = () => {
   return (
     <>
       <div>My page</div>
@@ -9,4 +9,4 @@ const My = () => {
   );
 };
 
-export default My;
+export default MyPage;
