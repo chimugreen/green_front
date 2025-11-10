@@ -12,20 +12,31 @@ const CalenderCell = () => {
   const [currentMonth, setCurrentMonth] = useState<number>(
     new Date().getMonth()
   );
-
-  // 달력 이동
-  const prevMonth = () => {
-    setCurrentMonth(currentMonth - 1);
-    console.log(`지금 날짜는 ${currentYear}년 ${currentMonth - 1}월`);
-  };
-  const nextMonth = () => {
-    setCurrentMonth(currentMonth + 1);
-    console.log(`지금 날짜는 ${currentYear}년 ${currentMonth}월`);
-  };
-
   const [currentYear, setCurrenYear] = useState<number>(
     new Date().getFullYear()
   );
+
+  // 달력 이동
+  //
+  const prevMonth = () => {
+    if (currentMonth === 0) {
+      // month 0 => 1월
+      setCurrentMonth(11);
+      setCurrenYear(currentYear - 1);
+    } else {
+      setCurrentMonth(currentMonth - 1);
+    }
+  };
+
+  const nextMonth = () => {
+    if (currentMonth === 11) {
+      // month 11 => 12월
+      setCurrentMonth(0);
+      setCurrenYear(currentYear + 1);
+    } else {
+      setCurrentMonth(currentMonth + 1);
+    }
+  };
 
   // 현재 날짜의 연도를 숫자로 반환하는 메서드
   const year = date.getFullYear();
@@ -37,6 +48,7 @@ const CalenderCell = () => {
   const days = date.getDate();
 
   //new Date(year, month, num); => 특정 날짜를 생성하는 문법
+  //new Date().getDay() => 0~6까지 일~토 생성
   // 이렇게 쓸 경우 m+1을 써서 월을 맞출 필요가 없어짐
   // currentYear 및 currentMonth 사용으로 버튼 이동시 달력도 같이 렌더링
   const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // 해당 연도와 당월의 1일을 생성
@@ -50,7 +62,8 @@ const CalenderCell = () => {
 
   // 당월 첫 날 앞에 빈칸 생성
   // 요일과 날짜 셀간의 순서 맞춤 위함
-  const calenderDate2 = Array(firstDay).fill(null).concat(calenderDate1);
+  const newFirstDay = firstDay === 0 ? 6 : firstDay - 1;
+  const calenderDate2 = Array(newFirstDay).fill(null).concat(calenderDate1);
 
   // 온클릭 이벤트 test
   const testOnClick = () => {
