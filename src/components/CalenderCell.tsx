@@ -5,7 +5,27 @@ import { HiCalendar } from 'react-icons/hi2';
 const CalenderCell = () => {
   // 라이브러리 없이 date 생성
   // 현재 날짜를 저장할 상태 초기값 생성
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
+
+  // 달력 이동 버튼
+  // useState로 상태변화 감지 & 초기값() = new Date().getMonth() : 현재 Month
+  const [currentMonth, setCurrentMonth] = useState<number>(
+    new Date().getMonth()
+  );
+
+  // 달력 이동
+  const prevMonth = () => {
+    setCurrentMonth(currentMonth - 1);
+    console.log(`지금 월은 ${currentMonth - 1}`);
+  };
+  const nextMonth = () => {
+    setCurrentMonth(currentMonth + 1);
+    console.log(`지금 월은 ${currentMonth + 1}`);
+  };
+
+  const [currentYear, setCurrenYear] = useState<number>(
+    new Date().getFullYear()
+  );
 
   // 현재 날짜의 연도를 숫자로 반환하는 메서드
   const year = date.getFullYear();
@@ -40,12 +60,14 @@ const CalenderCell = () => {
     <>
       <div className="flex justify-between">
         {/* 해당 버튼 클릭 시, 오늘 날짜로 변동 */}
-        <div className="m-1">달력 바뀌면 날짜 바뀌는 부분</div>
+        <div className="m-1">
+          {year}년 {currentMonth + 1}월
+        </div>
         <div className="flex gap-2 m-1 border-2">
-          <button onClick={testOnClick} className="cursor-pointer">
+          <button onClick={prevMonth} className="cursor-pointer">
             ◁
           </button>
-          <button onClick={testOnClick} className="cursor-pointer">
+          <button onClick={nextMonth} className="cursor-pointer">
             ▷
           </button>
         </div>
