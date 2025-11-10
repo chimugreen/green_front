@@ -8,7 +8,7 @@ const FeedPage = () => {
       <header>헤더 아이콘 미작업 영역</header>
       <hr />
       <div className="flex justify-around items-center h-screen ">
-        <div className="w-1/3 flex flex-col border-2">
+        <div className="w-1/3 h-100 flex flex-col rounded-2xl">
           <div>
             <CalenderCell />
           </div>

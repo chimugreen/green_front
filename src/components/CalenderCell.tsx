@@ -72,12 +72,12 @@ const CalenderCell = () => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-1">
         {/* 해당 버튼 클릭 시, 오늘 날짜로 변동 */}
-        <div className="m-1">
+        <div className="font-bold m-1">
           {currentYear}년 {currentMonth + 1}월
         </div>
-        <div className="flex gap-2 m-1 border-2">
+        <div className="flex gap-2 mr-3">
           <button onClick={prevMonth} className="cursor-pointer">
             ◁
           </button>
@@ -86,8 +86,7 @@ const CalenderCell = () => {
           </button>
         </div>
       </div>
-      {/* 구분선 */}
-      <hr />
+
       <div>
         <ul className="flex justify-around text-sm">
           <li>월</li>
@@ -99,7 +98,7 @@ const CalenderCell = () => {
           <li className="text-red-400">일</li>
         </ul>
       </div>
-      <hr />
+
       <div>
         <div className="flex flex-col text-center">
           <div className="grid grid-cols-7 mt-2 mb-2">
