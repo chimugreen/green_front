@@ -1,5 +1,5 @@
 // 달력 일자 셀
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiCalendar } from 'react-icons/hi2';
 
 const CalenderCell = () => {
@@ -16,11 +16,11 @@ const CalenderCell = () => {
   // 달력 이동
   const prevMonth = () => {
     setCurrentMonth(currentMonth - 1);
-    console.log(`지금 월은 ${currentMonth - 1}`);
+    console.log(`지금 날짜는 ${currentYear}년 ${currentMonth - 1}월`);
   };
   const nextMonth = () => {
     setCurrentMonth(currentMonth + 1);
-    console.log(`지금 월은 ${currentMonth + 1}`);
+    console.log(`지금 날짜는 ${currentYear}년 ${currentMonth}월`);
   };
 
   const [currentYear, setCurrenYear] = useState<number>(
@@ -38,11 +38,12 @@ const CalenderCell = () => {
 
   //new Date(year, month, num); => 특정 날짜를 생성하는 문법
   // 이렇게 쓸 경우 m+1을 써서 월을 맞출 필요가 없어짐
-  const firstDay = new Date(year, month, 1).getDay(); // 해당 연도와 당월의 1일을 생성
+  // currentYear 및 currentMonth 사용으로 버튼 이동시 달력도 같이 렌더링
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // 해당 연도와 당월의 1일을 생성
 
   // 해당 연도 당월 기준 이전달의 마지막 날을 생성
   // .getDate() => 마지막날이 어떤 값인지 알려줌
-  const lastDay = new Date(year, month, 0).getDate();
+  const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   // 날짜 배열 생성하기
   const calenderDate1 = Array.from({ length: lastDay }, (_, i) => i + 1);
@@ -61,7 +62,7 @@ const CalenderCell = () => {
       <div className="flex justify-between">
         {/* 해당 버튼 클릭 시, 오늘 날짜로 변동 */}
         <div className="m-1">
-          {year}년 {currentMonth + 1}월
+          {currentYear}년 {currentMonth + 1}월
         </div>
         <div className="flex gap-2 m-1 border-2">
           <button onClick={prevMonth} className="cursor-pointer">
