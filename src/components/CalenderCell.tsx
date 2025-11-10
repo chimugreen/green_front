@@ -72,12 +72,12 @@ const CalenderCell = () => {
 
   return (
     <>
-      <div className="flex justify-between mb-1">
+      <div className="flex justify-between mb-2">
         {/* 해당 버튼 클릭 시, 오늘 날짜로 변동 */}
-        <div className="font-bold m-1">
+        <div className="font-bold m-1 ml-9">
           {currentYear}년 {currentMonth + 1}월
         </div>
-        <div className="flex gap-2 mr-3">
+        <div className="flex gap-2 m-1 mr-4">
           <button onClick={prevMonth} className="cursor-pointer">
             ◁
           </button>
