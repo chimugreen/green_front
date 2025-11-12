@@ -85,22 +85,23 @@ const Calender = () => {
 
   // 날짜 선택 감지용 useState 생성
   // <type>선언 => Date 타입 또는 null
-  const [selectDate, setSelectDate] = useState<Date | null>(new Date());
+  const [selectDate, setSelectDate] = useState<Date | null>(new Date()); // 초기 상태 = 오늘 날짜
 
   //CSS 조건부용 변수 선언
   const isSameDate = (a: Date, b: Date | null) => {
-    if (!a || !b) return false;
+    if (!a || !b) return false; // a나 b가 다르면(!) false
     return (
+      // a와 b가 같을 경우 return
       a.getFullYear() === b.getFullYear() &&
       a.getMonth() === b.getMonth() &&
       a.getDate() === b.getDate()
     );
   };
-  // 온클릭 이벤트 test
+
   // 클릭 시, 선택한 날짜표시
   // 오늘 날짜는 회색처리
   // 선택 날짜는 검은색 배경/흰색글씨
-  const testOnClick = (day: number) => {
+  const dateOnClick = (day: number) => {
     const clickedDate = new Date(currentYear, currentMonth, day);
     setSelectDate(clickedDate);
     console.log(`오늘 날짜는 ${today}일`); // today > 무조건 오늘 날짜로 나옴
@@ -150,7 +151,7 @@ const Calender = () => {
                 <button
                   key={index}
                   onClick={() => {
-                    testOnClick(day);
+                    dateOnClick(day);
                   }}
                   className="flex flex-col items-center justify-center
                   m-1 p-1 rounded-2xl cursor-pointer"
