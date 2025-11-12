@@ -1,6 +1,6 @@
 // 피드 page
 
-import CalenderCell from '../components/CalenderCell';
+import Calender from '../components/Calender';
 
 const FeedPage = () => {
   return (
@@ -10,7 +10,7 @@ const FeedPage = () => {
       <div className="flex justify-around items-center h-screen ">
         <div className="w-1/3 h-100 flex flex-col rounded-2xl">
           <div>
-            <CalenderCell />
+            <Calender />
           </div>
         </div>{' '}
         <div className="w-1/3 flex border-2">
