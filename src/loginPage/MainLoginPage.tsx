@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import logo from '../img/icon.png';
 import { useEffect, useState } from 'react';
-import Modal from '../components/modal';
+import MainAppModal from '../components/MainAppModal';
 import MainPage from '../routers/MainPage';
 
 const MainLoginPage = () => {
@@ -60,7 +60,7 @@ const MainLoginPage = () => {
         </p>
       </div>
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+      <MainAppModal open={modalOpen} onClose={() => setModalOpen(false)}>
         <p className="text-center py-2 m-1 text-gray-500">
           데스크탑 앱 다운로드
         </p>
@@ -76,7 +76,7 @@ const MainLoginPage = () => {
         >
           취소
         </button>
-      </Modal>
+      </MainAppModal>
     </div>
   );
 };

@@ -1,9 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../components/Api';
+
+type User = {
+  id?: number;
+  email: string;
+  password: string;
+};
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const [users, setUsers] = useState<User[]>([]);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [msg, setMsg] = useState('');
+
+  // 회원 가입 버튼
+  const handleSubmit = async () => {
+    if (!email) {
+      setMsg('이메일을 입력해주세요.');
+      return;
+    }
+    if (!password) {
+      setMsg('비밀번호를 입력해주세요.');
+      return;
+    }
+    // Axios.Post 회원 가입
+    try {
+      const res = await api.post('/auth/signup', {
+        email,
+        password,
+      });
+      console.log(res.data);
+      setEmail('');
+      setPassword('');
+      alert('회원가입이 완료되었습니다.');
+      navigate('/');
+    } catch (error) {
+      setMsg('회원가입에 실패하였습니다.');
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mx-auto my-2 max-w-180 flex flex-col p-3">
@@ -21,12 +59,20 @@ const SignupPage = () => {
         <input
           type="text"
           placeholder="이메일 등록"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          autoComplete="email"
           required
           className="rounded-xl bg-gray-100 m-1 p-4 text-sm font-bold focus:border-none "
         />
         <input
           type="password"
           placeholder="비밀번호 등록"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          autoComplete="new-password"
           required
           className="rounded-xl bg-gray-100 m-1 p-4 text-sm font-bold"
         />
@@ -52,11 +98,26 @@ const SignupPage = () => {
       <div className="text-center">
         <button
           type="submit"
+          onClick={handleSubmit}
           className="bg-black text-white w-fit rounded-full p-3.5 px-6 m-4 text-sm font-bold hover:cursor-pointer"
         >
           이메일 인증
         </button>
+        {msg && <p className="text-red-400 text-sm">{msg}</p>}
       </div>
+      {/* <div className="flex flex-col justify-center items-center">
+        <div className="m-5 p-5 w-90 border-2 border-gray-300 rounded-lg text-center">
+          <h2 className="font-bold">유저 리스트</h2>
+          <hr className="my-2.5 border-gray-400" />
+          <ul className="text-sm text-gray-900">
+            {users.map((u) => (
+              <li key={u.id}>
+                이메일: {u.email}, 비밀번호: {u.password}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div> */}
     </div>
   );
 };
