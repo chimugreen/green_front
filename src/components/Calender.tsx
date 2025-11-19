@@ -60,6 +60,9 @@ const Calender = () => {
   const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   // 날짜 배열 생성하기
+  // Array.from()은 “배열처럼 생긴 객체”를 진짜 배열로 변환하는 문법
+  // Array.from(arrayLike, mapFn?)
+  // (_,i) > mapFn(매핑함수) : 각 요소를 어떻게 변환할지 정의하는 함수
   const calenderDate1 = Array.from({ length: lastDay }, (_, i) => i + 1);
 
   // 당월 첫 날 앞에 빈칸 생성

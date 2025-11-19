@@ -1,6 +1,7 @@
 // 피드 page
 
 import Calender from '../components/Calender';
+import Category from '../components/Category';
 
 const FeedPage = () => {
   return (
@@ -13,8 +14,8 @@ const FeedPage = () => {
             <Calender />
           </div>
         </div>{' '}
-        <div className="w-1/3 flex border-2">
-          <p>카테고리 컴포넌트 영역</p>
+        <div className="w-1/3 h-100 flex flex-col border-2 p-2">
+          {<Category />}
         </div>
       </div>
     </>
