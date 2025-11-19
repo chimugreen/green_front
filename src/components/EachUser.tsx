@@ -4,11 +4,37 @@ import feedPic from '../img/feedpic.jpg';
 import fPic from '../img/f.jpg';
 import mala from '../img/mala.jpeg';
 import { SlArrowLeftCircle } from 'react-icons/sl';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { api } from './api';
+
+interface User {
+  name: string;
+  email: string;
+  postCount: number;
+  followerCount: number;
+  followingCount: number;
+  isFollowing: boolean;
+}
 
 // 개인 페이지
 const EachUser = () => {
+  const { userId } = useParams();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await api.get(`/user/${userId}`);
+        setUser(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    if (userId) fetchUser();
+    if (!userId) <p>로딩 중 。。。</p>;
+  }, [userId]);
+
   // const [images, setImages] = useState<string[]>([]);
   const images = [feedPic, fPic, mala];
   const navigate = useNavigate();
@@ -24,7 +50,7 @@ const EachUser = () => {
       <div className="my-1 mx-auto max-w-120">
         <div className="flex items-center my-2 w-screen">
           <button
-            className="flex px-2 hover:cursor-pointer"
+            className="flex px-2 cursor-pointer"
             onClick={() => navigate(-1)}
           >
             <SlArrowLeftCircle />
@@ -40,12 +66,14 @@ const EachUser = () => {
           className="size-25 float-start mx-3"
         />
         <div className="flex flex-col max-w-120 w-screen mx-3">
-          <p className="font-bold text-xl">nick</p>
-          <p className="text-gray-600 text-sm">email@email</p>
+          <p className="font-bold text-xl">{user?.name}</p>
+          <p className="text-gray-600 text-sm">{user?.email}</p>
           <div className="flex text-sm py-0.5">
             <p>게시물</p> <p className="font-bold px-1">{images.length}</p>
-            <p>팔로워</p> <p className="font-bold px-1">1천</p>
-            <p>팔로잉</p> <p className="font-bold pl-1">1천</p>
+            <p>팔로워</p>{' '}
+            <p className="font-bold px-1">{user?.followerCount}</p>
+            <p>팔로잉</p>{' '}
+            <p className="font-bold pl-1">{user?.followingCount}</p>
           </div>
           {/* 팔로우 버튼 */}
           <button

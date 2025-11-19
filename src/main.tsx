@@ -4,13 +4,13 @@ import './index.css'; // ✅ Tailwind import
 import Login from './loginPage/loginPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignupPage from './loginPage/SignupPage';
-import EachUser from './components/EachUser';
+import CreatePost from './SearchPage/CreatePost';
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <SignupPage /> },
-  { path: '/userDetail', element: <EachUser /> },
+  { path: '/createPost', element: <CreatePost /> },
 ]);
 
 createRoot(document.getElementById('root')!).render(

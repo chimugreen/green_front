@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../components/api';
+import { loginUseCase } from '../useCase/loginUseCase';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -10,14 +10,13 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await api.post('/auth/signin', { email, password });
-      console.log(res.data.accessToken);
+      await loginUseCase(email, password);
       alert('로그인 완료되었습니다.');
       navigate('/');
       localStorage.setItem('pageChange', 'true');
     } catch (error) {
       console.error(error);
-      alert('로그인 실패했습니다.')
+      alert('로그인 실패했습니다.');
     }
   };
 
