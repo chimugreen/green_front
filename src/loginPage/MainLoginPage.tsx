@@ -3,27 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../img/icon.png';
 import { useEffect, useState } from 'react';
 import MainAppModal from '../components/MainAppModal';
-import MainPage from '../routers/MainPage';
+// import MainPage from '../routers/MainPage';
 
 const MainLoginPage = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
 
   // 로그인 시, MainPage로 전환
-  const [pageChange, setPageChange] = useState<boolean>(false);
+  // const [pageChange, setPageChange] = useState<boolean>(false);
 
   // useEffect 사용, 새로고침해도 유지
   // localStorage.getItem('pageChange')
   // => - 브라우저의 localStorage에서 'pageChange'라는 키의 값을 가져옴
 
-  useEffect(() => {
-    const changed = localStorage.getItem('pageChange');
-    // changed가 'true'면 setPageChange 실행, [] > 첫 렌더링(마운트)시에만
-    if (changed === 'true') setPageChange(true);
-  }, []);
+  // useEffect(() => {
+  //   const changed = localStorage.getItem('pageChange');
+  //   // changed가 'true'면 setPageChange 실행, [] > 첫 렌더링(마운트)시에만
+  //   if (changed === 'true') setPageChange(true);
+  // }, []);
 
   // pageChange가 true면 MainPage.tsx 호출
-  if (pageChange) return <MainPage />;
+  // if (pageChange) return <MainPage />;
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">

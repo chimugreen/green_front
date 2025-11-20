@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 import { loginUseCase } from '../useCase/loginUseCase';
+import { userInfoStorage } from '../utils/userInfoStorage';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -12,8 +13,7 @@ const LoginPage = () => {
     try {
       await loginUseCase(email, password);
       alert('로그인 완료되었습니다.');
-      navigate('/');
-      localStorage.setItem('pageChange', 'true');
+      navigate('/todoCalendar');
     } catch (error) {
       console.error(error);
       alert('로그인 실패했습니다.');
