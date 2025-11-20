@@ -41,24 +41,29 @@ const EachUser = ({ userId }: EachUserProps) => {
     // setIsFollowed((prev) => !prev);
   }, [loadedUserData]);
 
-  const handleFollow = async () => {
-    if (!userId) return;
+  // const handleFollow = async () => {
+  //   if (!userId) return;
 
-    try {
-      if (isFollowed) {
-        // 언팔
-        await apiWithHeader.delete(`/user/followings/${userId}`);
-        setIsFollowed(false);
-        setFollowerCount((prev) => Math.max(prev - 1, 0));
-      } else {
-        // 팔로우
-        await apiWithHeader.post(`/user/followings/${userId}`);
-        setIsFollowed(true);
-        setFollowerCount((prev) => prev + 1);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  //   try {
+  //     if (isFollowed) {
+  //       // 언팔
+  //       await apiWithHeader.delete(`/user/followings/${userId}`);
+  //       setIsFollowed(false);
+  //       setFollowerCount((prev) => Math.max(prev - 1, 0));
+  //     } else {
+  //       // 팔로우
+  //       await apiWithHeader.post(`/user/followings/${userId}`);
+  //       setIsFollowed(true);
+  //       setFollowerCount((prev) => prev + 1);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  const handleFollow = () => {
+    setIsFollowed((prev) => !prev);
+    setFollowerCount((prev) => (isFollowed ? Math.max(prev - 1, 0) : prev + 1));
   };
 
   // // 유저 닉네임 변경
@@ -124,7 +129,7 @@ const EachUser = ({ userId }: EachUserProps) => {
             <p>팔로잉</p>
             <p
               onClick={() => setFollowingOpen(true)}
-              className="font-bold pl-1"
+              className="font-bold pl-1 cursor-pointer"
             >
               {loadedUserData?.followingCount}
             </p>
@@ -138,6 +143,7 @@ const EachUser = ({ userId }: EachUserProps) => {
           </button> */}
           <button
             onClick={handleFollow}
+            value={followerCount}
             className={`${
               isFollowed
                 ? 'text-sm bg-gray-200 p-2 rounded-xl transition-all cursor-pointer'
@@ -160,13 +166,13 @@ const EachUser = ({ userId }: EachUserProps) => {
         ))}
       </div>
       <FollowerList open={followerOpen} onClose={() => setFollowerOpen(false)}>
-        <div>
-          <p>팔로워</p>
+        <div className="flex flex-col">
+          <p className="font-bold text-center p-2">팔로워</p>
           {loadingFollower ? (
             <p>로딩 중 。。。</p>
           ) : (
             follower.map((u) => (
-              <div key={u.userId}>
+              <div key={u.userId} className="flex">
                 <img
                   src={u.profileImageUrl}
                   alt="프로필 사진"
