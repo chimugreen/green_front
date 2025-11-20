@@ -6,44 +6,79 @@ import mala from '../img/mala.jpeg';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { api } from './api';
+import FollowerList from '../userPage/FollowerList';
+import FollowingList from '../userPage/FollowingList';
+import { useFollowData } from '../hooks/useFollowData';
+import { useUserId } from '../useCase/useUserId';
+import { apiWithHeader } from './api';
 
-interface User {
-  name: string;
-  email: string;
-  postCount: number;
-  followerCount: number;
-  followingCount: number;
-  isFollowing: boolean;
+interface EachUserProps {
+  userId: number;
 }
 
 // 개인 페이지
-const EachUser = () => {
-  const { userId } = useParams();
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await api.get(`/user/${userId}`);
-        setUser(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    if (userId) fetchUser();
-    if (!userId) <p>로딩 중 。。。</p>;
-  }, [userId]);
-
-  // const [images, setImages] = useState<string[]>([]);
+const EachUser = ({ userId }: EachUserProps) => {
+  // 임시 유저페이지 사진보여줌
   const images = [feedPic, fPic, mala];
   const navigate = useNavigate();
-  const [isFollowed, setIsFollowed] = useState(false);
+  // 'user/{userId}' 형식의 주소
+  const { loadedUserData, isLoading } = useUserId(userId);
+
+  // 팔로워, 팔로잉 가져오기
+  const [followerOpen, setFollowerOpen] = useState(false);
+  const [followingOpen, setFollowingOpen] = useState(false);
+  const { follower, following, loadingFollower, loadingFollowing } =
+    useFollowData(userId);
 
   // 팔로우 버튼 - 다시 누르면 팔로우 취소
-  const handleFollow = () => {
-    setIsFollowed((prev) => !prev);
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
+
+  useEffect(() => {
+    if (!loadedUserData) return;
+    setIsFollowed(loadedUserData.isFollowing);
+    setFollowerCount(loadedUserData.followerCount);
+    // setIsFollowed((prev) => !prev);
+  }, [loadedUserData]);
+
+  const handleFollow = async () => {
+    if (!userId) return;
+
+    try {
+      if (isFollowed) {
+        // 언팔
+        await apiWithHeader.delete(`/user/followings/${userId}`);
+        setIsFollowed(false);
+        setFollowerCount((prev) => Math.max(prev - 1, 0));
+      } else {
+        // 팔로우
+        await apiWithHeader.post(`/user/followings/${userId}`);
+        setIsFollowed(true);
+        setFollowerCount((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  // // 유저 닉네임 변경
+  // const [nickname, setNickname] = useState(users?.name || ''); // 닉네임 표시
+  // const [editNick, setEditNick] = useState(false); // 닉네임 수정 가능한 상태로 변환; f:기본상태 t:수정가능
+
+  // 닉네임 수정 버튼
+  // const handleNickname = async () => {
+  //   try {
+  //     const res = await apiWithHeader.patch(`/user/${numericUserId}`, {
+  //       name: nickname,
+  //     });
+  //     setUsers(res.data);
+  //     setEditNick(false);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  if (isLoading) return <p>로딩 중 ...</p>;
 
   return (
     <div className="flex flex-col max-w-120 mx-auto my-5">
@@ -66,16 +101,41 @@ const EachUser = () => {
           className="size-25 float-start mx-3"
         />
         <div className="flex flex-col max-w-120 w-screen mx-3">
-          <p className="font-bold text-xl">{user?.name}</p>
-          <p className="text-gray-600 text-sm">{user?.email}</p>
+          {/* {editNick ? (
+            <input
+              className="font-bold text-xl"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+          ) : (
+            <p className="font-bold text-xl">{users?.name}</p>
+          )} */}
+          <p className="font-bold text-xl">{loadedUserData?.name}</p>
+          <p className="text-gray-600 text-sm">{loadedUserData?.email}</p>
           <div className="flex text-sm py-0.5">
             <p>게시물</p> <p className="font-bold px-1">{images.length}</p>
-            <p>팔로워</p>{' '}
-            <p className="font-bold px-1">{user?.followerCount}</p>
-            <p>팔로잉</p>{' '}
-            <p className="font-bold pl-1">{user?.followingCount}</p>
+            <p>팔로워</p>
+            <p
+              onClick={() => setFollowerOpen(true)}
+              className="font-bold px-1 cursor-pointer"
+            >
+              {loadedUserData?.followerCount}
+            </p>
+            <p>팔로잉</p>
+            <p
+              onClick={() => setFollowingOpen(true)}
+              className="font-bold pl-1"
+            >
+              {loadedUserData?.followingCount}
+            </p>
           </div>
           {/* 팔로우 버튼 */}
+          {/* <button
+            onClick={() => setEditNick((prev) => !prev)}
+            className="text-sm bg-gray-200 p-2 rounded-xl transition-all cursor-pointer"
+          >
+            {editNick ? '완료' : '닉네임 수정'}
+          </button> */}
           <button
             onClick={handleFollow}
             className={`${
@@ -99,6 +159,47 @@ const EachUser = () => {
           </div>
         ))}
       </div>
+      <FollowerList open={followerOpen} onClose={() => setFollowerOpen(false)}>
+        <div>
+          <p>팔로워</p>
+          {loadingFollower ? (
+            <p>로딩 중 。。。</p>
+          ) : (
+            follower.map((u) => (
+              <div key={u.userId}>
+                <img
+                  src={u.profileImageUrl}
+                  alt="프로필 사진"
+                  className="size-10 float-left rounded-full"
+                />
+                <p>{u.name}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </FollowerList>
+      <FollowingList
+        open={followingOpen}
+        onClose={() => setFollowingOpen(false)}
+      >
+        <div className="flex flex-col">
+          <p className="font-bold text-center p-2">팔로잉</p>
+          {loadingFollowing ? (
+            <p>로딩 중 。。。</p>
+          ) : (
+            following.map((u) => (
+              <div key={u.userId} className="flex">
+                <img
+                  src={u.profileImageUrl}
+                  alt="프로필 사진"
+                  className="size-10 float-left rounded-full"
+                />
+                <p>{u.name}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </FollowingList>
     </div>
   );
 };

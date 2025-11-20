@@ -53,7 +53,7 @@ const EachPost = () => {
           className="size-10 float-left rounded-full cursor-pointer"
           src={logo}
           alt="프로필 사진"
-          onClick={() => navigate('/userDetail')}
+          onClick={() => navigate('')}
         />
         <p className="font-bold px-2">nickname</p>
       </div>
