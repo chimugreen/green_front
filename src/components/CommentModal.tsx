@@ -1,10 +1,12 @@
+import React from 'react';
+
 type ModalProps = {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-function Modal({ open, onClose, children }: ModalProps) {
+function CommentModal({ open, onClose, children }: ModalProps) {
   if (!open) return null;
 
   return (
@@ -13,7 +15,7 @@ function Modal({ open, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl p-4 w-80 flex flex-col"
+        className="rounded-2xl p-4 w-80 h-100 flex flex-col bg-gray-200"
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -22,5 +24,4 @@ function Modal({ open, onClose, children }: ModalProps) {
   );
 }
 
-
-export default Modal;
+export default CommentModal;

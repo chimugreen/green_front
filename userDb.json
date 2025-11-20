@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "e3ac",
+      "email": "sss@sss",
+      "password": "ssss"
+    },
+    {
+      "id": "0840",
+      "email": "mmmm@mmm",
+      "password": "mmmm"
+    },
+    {
+      "id": "f7f3",
+      "email": "dddd",
+      "password": "dddd"
+    }
+  ]
+}
