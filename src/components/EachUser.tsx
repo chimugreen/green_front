@@ -86,7 +86,7 @@ const EachUser = ({ userId }: EachUserProps) => {
   if (isLoading) return <p>로딩 중 ...</p>;
 
   return (
-    <div className="flex flex-col max-w-120 mx-auto my-5">
+    <div className="flex flex-col max-w-120 mx-auto my-2">
       <div className="my-1 mx-auto max-w-120">
         <div className="flex items-center my-2 w-screen">
           <button

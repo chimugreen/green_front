@@ -15,7 +15,7 @@ const SearchPage = () => {
           >
             <SlArrowLeftCircle />
           </button> */}
-          <div className="py-2 px-4 bg-gray-100 text-gray-600 w-screen flex justify-between rounded-md">
+          <div className="mt-2 py-2 px-4 bg-red-200 text-gray-600 w-screen flex justify-between rounded-md">
             <p className="font-bold text-xl w-auto">make plan</p>
             <button
               className="font-bold float-right cursor-pointer"

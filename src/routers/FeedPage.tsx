@@ -13,7 +13,7 @@ const FeedPage = () => {
           <div>
             <Calender />
           </div>
-        </div>{' '}
+        </div>
         <div className="w-1/3 h-100 flex flex-col border-2 p-2">
           {<Category />}
         </div>

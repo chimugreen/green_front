@@ -10,7 +10,7 @@ export const MainFooter = () => {
       <div className="flex justify-center gap-10">
         <button
           className="cursor-pointer flex flex-col
-           items-center"
+           items-center text-gray-700 font-bold"
           onClick={() => navigate('/todoCalendar')}
         >
           <IoHomeOutline />
@@ -18,7 +18,7 @@ export const MainFooter = () => {
         </button>
         <button
           className="cursor-pointer flex flex-col
-           items-center"
+           items-center text-gray-700 font-bold"
           onClick={() => navigate('/postFeed')}
         >
           <VscSearch />
@@ -26,7 +26,7 @@ export const MainFooter = () => {
         </button>
         <button
           className="cursor-pointer flex flex-col
-           items-center"
+           items-center text-gray-700 font-bold"
           onClick={() => navigate('/alert')}
         >
           <VscBell />
@@ -34,7 +34,7 @@ export const MainFooter = () => {
         </button>
         <button
           className="cursor-pointer flex flex-col
-           items-center"
+           items-center text-gray-700 font-bold"
           onClick={() => navigate('/user/:userId')}
         >
           <VscAccount />
