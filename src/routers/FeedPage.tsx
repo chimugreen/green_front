@@ -117,6 +117,7 @@ const FeedPage = () => {
             <Calender
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
+              todoList={todoList}
             />
           </div>
         </div>{' '}

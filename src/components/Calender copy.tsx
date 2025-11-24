@@ -1,22 +1,19 @@
 import { useState } from 'react';
+import { HiCalendar } from 'react-icons/hi2';
 
 // FeedPage.tsx에서 정의한 props 함수의 타입 선언
 interface CalendarProps {
-  selectedDate: Date; // 타입 = Date
+  selectedDate: Date;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
-  todoList: Todo[];
 }
 
 // 매개변수에 props 전달
-const Calender = ({
-  selectedDate,
-  setSelectedDate,
-  todoList,
-}: CalendarProps) => {
+const Calender = ({ selectedDate, setSelectedDate }: CalendarProps) => {
   const [currentYear, setCurrentYear] = useState(selectedDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(selectedDate.getMonth());
 
   // onClick 이벤트로 버튼 클릭 시, 현재 날짜로 리턴
+  // 헤더 클릭 시, 오늘 날짜로 하이라이트 되돌리기
   const returnDate = () => {
     const today = new Date();
     setSelectedDate(today);
@@ -25,6 +22,7 @@ const Calender = ({
   };
 
   // 달력 이동
+  // setCurrentMonth(현재 월)이 0(1월)일 때, 이전 버튼 클릭 시, setCurrenYear(현재 년도) - 1
   const prevMonth = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11);
@@ -34,6 +32,7 @@ const Calender = ({
     }
   };
 
+  // setCurrentMonth(현재 월)이 11(12월)일 때, 다음 버튼 클릭 시, setCurrenYear(현재 년도) + 1
   const nextMonth = () => {
     if (currentMonth === 11) {
       setCurrentMonth(0);
@@ -43,43 +42,41 @@ const Calender = ({
     }
   };
 
-  // 클릭 시 선택한 날짜 표시
+  // 클릭 시, 선택한 날짜표시
+  // 오늘 날짜는 회색처리
+  // 선택 날짜는 검은색 배경/흰색글씨
   const dateOnClick = (day: number) => {
     setSelectedDate(new Date(currentYear, currentMonth, day));
   };
 
+  //new Date(year, month, num); => 특정 날짜를 생성하는 문법
+  //new Date().getDay() => 0~6까지 일~토 생성
+  // 이렇게 쓸 경우 m+1을 써서 월을 맞출 필요가 없어짐
+  // currentYear 및 currentMonth 사용으로 버튼 이동시 달력도 같이 렌더링
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+
+  // 해당 연도 당월 기준 이전달의 마지막 날을 생성
+  // .getDate() => 마지막날이 어떤 값인지 알려줌
   const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-  // 날짜 배열 생성 (객체로 day와 fullDate 포함)
-  const days = Array.from({ length: lastDay }, (_, i) => ({
-    day: i + 1,
-    fullDate: new Date(currentYear, currentMonth, i + 1),
-  }));
+  // 날짜 배열 생성하기
+  // Array.from()은 “배열처럼 생긴 객체”를 진짜 배열로 변환하는 문법
+  // Array.from(arrayLike, mapFn?)
+  // (_,i) > mapFn(매핑함수) : 각 요소를 어떻게 변환할지 정의하는 함수
+  const days = Array.from({ length: lastDay }, (_, i) => i + 1);
 
+  // 당월 첫 날 앞에 빈칸 생성
+  // 요일과 날짜 셀간의 순서 맞춤 위함
   const convertedFirstDay = firstDay === 0 ? 6 : firstDay - 1;
   const calendar = Array(convertedFirstDay).fill(null).concat(days);
 
-  // 날짜 비교용
+  //CSS 조건부용 변수 선언
   const isSameDate = (a: Date, b: Date) => {
     return (
       a.getFullYear() === b.getFullYear() &&
       a.getMonth() === b.getMonth() &&
       a.getDate() === b.getDate()
     );
-  };
-
-  // 해당 날짜의 todo 상태
-  const getTodoStatusForDate = (date: Date) => {
-    const todosForDate = todoList.filter(
-      (todo) =>
-        todo.date.getFullYear() === date.getFullYear() &&
-        todo.date.getMonth() === date.getMonth() &&
-        todo.date.getDate() === date.getDate()
-    );
-    const total = todosForDate.length;
-    const finished = todosForDate.filter((t) => t.isFinished).length;
-    return { total, finished };
   };
 
   return (
@@ -117,41 +114,38 @@ const Calender = ({
       {/* ---- 달력 날짜 ---- */}
       <div className="flex flex-col text-center">
         <div className="grid grid-cols-7 mt-2 mb-2">
-          {calendar.map((dayObj, idx) => {
-            if (!dayObj) return <div key={idx} />; // 빈칸 처리
-
-            const { day, fullDate } = dayObj; // 구조분해
-
-            const { total, finished } = getTodoStatusForDate(fullDate); // todo 상태
-
-            return (
+          {calendar.map((day, idx) =>
+            day ? (
               <button
                 key={idx}
-                onClick={() => dateOnClick(day)} // day 숫자 전달
-                className="flex flex-col items-center justify-center m-1 p-1 rounded-2xl cursor-pointer"
+                onClick={() => dateOnClick(day)}
+                className="flex flex-col items-center justify-center
+                m-1 p-1 rounded-2xl cursor-pointer"
               >
-                {/* todo 개수 표시 */}
-                <div className="mt-1 w-5 h-5 border-gray-300 border-2 flex items-center justify-center text-xs">
-                  {total === 0
-                    ? ''
-                    : total === finished
-                    ? '✔'
-                    : total - finished}
-                </div>
+                <span className="text-2xl">
+                  <HiCalendar />
+                </span>
 
                 {/* 날짜 스타일 */}
                 <div
-                  className={`p-1 m-1 w-6 text-sm rounded-2xl ${
-                    isSameDate(fullDate, selectedDate)
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black'
-                  }`}
+                  className={`p-1 m-1 w-6 text-sm rounded-2xl
+                    ${
+                      isSameDate(
+                        new Date(currentYear, currentMonth, day),
+                        selectedDate
+                      )
+                        ? 'bg-black text-white'
+                        : 'bg-white text-black'
+                    }
+                  `}
                 >
                   {day}
                 </div>
               </button>
-            );
-          })}
+            ) : (
+              <div key={idx} />
+            )
+          )}
         </div>
       </div>
     </>
