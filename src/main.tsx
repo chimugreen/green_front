@@ -1,12 +1,11 @@
 import { createRoot } from 'react-dom/client';
-import App from './App'; // ✅ App 컴포넌트 임포트
 import './index.css'; // ✅ Tailwind import
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MyPage from './routers/MyPage';
 import SearchPage from './routers/SearchPage';
 import FeedPage from './routers/FeedPage';
 import AlertPage from './routers/AlertPage';
-import { Layout } from './components/Layout';
+import { Layout } from './components/layout/Layout';
 import MainLoginPage from './loginPage/MainLoginPage';
 import LoginPage from './loginPage/LoginPage';
 import SignupPage from './loginPage/SignupPage';
@@ -21,9 +20,12 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       // 로그인 후 메인 페이지
-      { path: '/todoCalendar', element: <FeedPage /> },
-      { path: '/postFeed', element: <SearchPage /> },
+      { path: '/todocalendar', element: <FeedPage /> },
+      { path: '/postfeed', element: <SearchPage /> },
       { path: '/alert', element: <AlertPage /> },
+      { path: '/user/my', element: <MyPage /> },
+      // 추가 페이지
+      { path: '/createpost', element: <CreatePost /> },
       { path: '/user/:userId', element: <MyPage /> },
       // 추가 페이지
       { path: '/createpost', element: <CreatePost /> },

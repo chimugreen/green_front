@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from '../img/icon.png';
 import feedPic from '../img/feedpic.jpg';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';

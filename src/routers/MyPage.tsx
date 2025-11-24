@@ -1,9 +1,10 @@
 import EachUser from '../components/EachUser';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { userInfoStorage } from '../utils/userInfoStorage';
 
 const MyPage = () => {
-  const myId = userInfoStorage.getUserId();
+  const { userId } = useParams<{ userId: string }>();
+  const myId = Number(userInfoStorage.getUserId());
   const navigate = useNavigate();
 
   if (!myId) {
@@ -11,7 +12,9 @@ const MyPage = () => {
     navigate('/login');
     return;
   }
-  return <EachUser userId={myId} />;
+  const loadUserId = userId ? Number(userId) : myId;
+
+  return <EachUser userId={loadUserId} />;
 };
 
 export default MyPage;
