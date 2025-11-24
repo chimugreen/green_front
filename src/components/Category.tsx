@@ -5,7 +5,7 @@
 interface CategoryProps {
   inputText: string;
   setInputText: React.Dispatch<React.SetStateAction<string>>;
-  todoList: string[];
+  todoList: Todo[];
   handleAdd: () => void;
   handleDel: (index: number) => void;
   handleUpdate: (index: number, newText: string) => void;
@@ -60,7 +60,7 @@ const Category = ({
             >
               <div className="flex gap-2 m-1 justify-between items-center">
                 <img className="size-5" src="./src/img/icon.png" alt="아이콘" />
-                <span>{todo}</span>
+                <span>{todo.content}</span>
               </div>
 
               <div
@@ -89,7 +89,7 @@ const Category = ({
                     <button
                       onClick={() => {
                         setEditIndex(index);
-                        setEditText(todo);
+                        setEditText(todo.content);
                       }}
                     >
                       수정
