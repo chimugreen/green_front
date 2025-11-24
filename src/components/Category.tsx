@@ -1,8 +1,6 @@
 // Category
 // 투두리스트
 
-import { useEffect, useState } from 'react';
-
 // Category props 타입 정의
 interface CategoryProps {
   inputText: string;

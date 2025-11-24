@@ -6,13 +6,18 @@ import Category from '../components/Category';
 
 const FeedPage = () => {
   // TODOS 배열
+  // Todo는 아래의 내용을 가지고 있는 객체
   type Todo = {
-    content: string;
-    date: Date;
-    isFinished: boolean;
+    id: number; // 할일 번호
+    content: string; // 할일 내용
+    date: Date; // 할일 날짜
+    isFinished: boolean; // 할일 완료 여부
   };
 
-  // Calender.tsx porps
+  //? todos > Todo 타입의 배열
+  const todos: Todo[] = [];
+
+  // Calender.tsx props
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   //? Category
@@ -83,17 +88,17 @@ const FeedPage = () => {
           </div>
         </div>{' '}
         <div className="w-1/3 h-100 flex flex-col border-2 p-2">
-          <Category
-            inputText={inputText}
-            setInputText={setInputText}
+          <Category // Category에 있던 todo 기능 정의 전부 feedPage로 올림, 전부 전달해야됨
+            inputText={inputText} // 추가내용
+            setInputText={setInputText} // 추가내용
             todoList={todoList}
-            handleAdd={handleAdd}
-            handleDel={handleDel}
-            handleUpdate={handleUpdate}
-            editText={editText}
-            setEditText={setEditText}
-            editIndex={editIndex}
-            setEditIndex={setEditIndex}
+            handleAdd={handleAdd} // 추가버튼
+            handleDel={handleDel} // 삭제버튼
+            handleUpdate={handleUpdate} // 수정버튼
+            editText={editText} // 수정내용
+            setEditText={setEditText} // 수정내용
+            editIndex={editIndex} // 수정 번호
+            setEditIndex={setEditIndex} // 수정번호
           />
         </div>
       </div>
