@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import './index.css'; // ✅ Tailwind import
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import CreatePost from './SearchPage/CreatePost';
 import MyPage from './routers/MyPage';
 import SearchPage from './routers/SearchPage';
 import FeedPage from './routers/FeedPage';
@@ -10,6 +9,7 @@ import { Layout } from './components/layout/Layout';
 import MainLoginPage from './loginPage/MainLoginPage';
 import LoginPage from './loginPage/LoginPage';
 import SignupPage from './loginPage/SignupPage';
+import CreatePost from './routers/pages/post/createPost/CreatePost';
 
 const router = createBrowserRouter([
   // 로그인 전
@@ -27,6 +27,8 @@ const router = createBrowserRouter([
       // 추가 페이지
       { path: '/createpost', element: <CreatePost /> },
       { path: '/user/:userId', element: <MyPage /> },
+      // 추가 페이지
+      { path: '/createpost', element: <CreatePost /> },
     ],
   },
 ]);
