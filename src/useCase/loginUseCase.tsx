@@ -1,7 +1,6 @@
 import { api } from '../components/api';
 import { tokenManager } from '../utils/tokenManager';
 import { userInfoStorage } from '../utils/userInfoStorage';
-import { useUserId } from './useUserId';
 
 export const loginUseCase = async (email: string, password: string) => {
   const res = await api.post('/auth/signin', { email, password });

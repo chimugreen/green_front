@@ -20,8 +20,14 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      'no-unused-vars': 'off', // JS용 unused 변수 경고 끔
-      '@typescript-eslint/no-unused-vars': 'off', // TS용 unused 변수 경고 끔
+      // 🔥 JS 기본 unused 경고 끄기
+      'no-unused-vars': 'off',
+
+      // 🔥 TS unused 경고 완전히 끄기
+      '@typescript-eslint/no-unused-vars': 'off',
+
+      // (선택) react props도 무시
+      // 'react/jsx-uses-vars': 'off'
     },
   },
 ]);

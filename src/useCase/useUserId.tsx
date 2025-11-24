@@ -29,5 +29,5 @@ export const useUserId = (userId: number) => {
     };
     load();
   }, [userId]);
-  return { loadedUserData, isLoading };
+  return { setLoadedUserData, loadedUserData, isLoading };
 };

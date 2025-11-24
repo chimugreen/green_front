@@ -120,7 +120,7 @@ const FeedPage = () => {
               todoList={todoList}
             />
           </div>
-        </div>{' '}
+        </div>
         <div className="w-1/3 h-100 flex flex-col border-2 p-2">
           <Category // Category에 있던 todo 기능 정의 전부 feedPage로 올림, 전부 전달해야됨
             inputText={inputText} // 추가내용

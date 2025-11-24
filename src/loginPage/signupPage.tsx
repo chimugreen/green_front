@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../components/api';
@@ -11,7 +11,6 @@ type User = {
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const [users, setUsers] = useState<User[]>([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
@@ -105,19 +104,6 @@ const SignupPage = () => {
         </button>
         {msg && <p className="text-red-400 text-sm">{msg}</p>}
       </div>
-      {/* <div className="flex flex-col justify-center items-center">
-        <div className="m-5 p-5 w-90 border-2 border-gray-300 rounded-lg text-center">
-          <h2 className="font-bold">유저 리스트</h2>
-          <hr className="my-2.5 border-gray-400" />
-          <ul className="text-sm text-gray-900">
-            {users.map((u) => (
-              <li key={u.id}>
-                이메일: {u.email}, 비밀번호: {u.password}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div> */}
     </div>
   );
 };

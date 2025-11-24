@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from '../img/icon.png';
 
 const CreatePost = () => {
-    const [context, setContext] = useState('');
-//     const [contexts, setContexts] = 
+  const [context, setContext] = useState('');
+  //     const [contexts, setContexts] =
 
-//   const handlePost = () => {
-//     if(context == );
-//   };
+  //   const handlePost = () => {
+  //     if(context == );
+  //   };
 
   return (
     <div className="flex flex-col">
@@ -23,8 +23,8 @@ const CreatePost = () => {
       <input
         type="text"
         value={context}
-              onChange={(e) => setContext(e.target.value)}
-              className=''
+        onChange={(e) => setContext(e.target.value)}
+        className=""
       />
       <button disabled={!context.trim()}>게시</button>
     </div>

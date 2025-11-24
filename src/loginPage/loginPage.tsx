@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 import { loginUseCase } from '../useCase/loginUseCase';
-import { userInfoStorage } from '../utils/userInfoStorage';
 
 const LoginPage = () => {
   const navigate = useNavigate();

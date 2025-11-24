@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from '../img/icon.png';
 import feedPic from '../img/feedpic.jpg';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
@@ -97,7 +97,7 @@ const EachPost = () => {
           onChange={(e) => setComment(e.target.value)}
         />
         <button
-          className="float-right px-1.5 py-0.5 rounded-md cursor-pointer bg-blue-300 text-white"
+          className="float-right px-1.5 py-0.5 rounded-md cursor-pointer bg-sky-600 text-white"
           onClick={handleCommentPost}
           disabled={!comment.trim()}
         >
