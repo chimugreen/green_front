@@ -47,7 +47,6 @@ export const useFollowData = (userId: number) => {
         setLoadingFollowing(false);
       }
     };
-
     fetchFollower();
     fetchFollowing();
   }, [userId]);

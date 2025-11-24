@@ -13,7 +13,7 @@ function FollowerList({ open, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl p-4 w-80 flex flex-col"
+        className="bg-gray-200 rounded-2xl p-4 w-80 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {children}
