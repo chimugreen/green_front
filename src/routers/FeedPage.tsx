@@ -90,13 +90,22 @@ const FeedPage = () => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
   }, [todoList]);
 
-  //
+  // 선택된 날짜(selectedDate)와 동일한 날짜를 가진 todo만 필터링
   const todosForSelectedDate = todoList.filter(
     (todo) =>
       todo.date.getFullYear() === selectedDate.getFullYear() &&
       todo.date.getMonth() === selectedDate.getMonth() &&
       todo.date.getDate() === selectedDate.getDate()
   );
+
+  // 완료표시 여부
+  const handleToggleFinished = (id: number) => {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
+      )
+    );
+  };
 
   return (
     <>
@@ -123,6 +132,7 @@ const FeedPage = () => {
             setEditText={setEditText} // 수정내용
             editIndex={editIndex} // 수정 번호
             setEditIndex={setEditIndex} // 수정번호
+            handleToggleFinished={handleToggleFinished} // 완료표시 여부
           />
         </div>
       </div>

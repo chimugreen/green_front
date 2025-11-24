@@ -13,6 +13,7 @@ interface CategoryProps {
   setEditText: React.Dispatch<React.SetStateAction<string>>;
   editIndex: number | null;
   setEditIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  handleToggleFinished: (id: number) => void; // 완료표시 여부 props
 }
 
 // 매개변수에 정의한 props 전달
@@ -27,6 +28,7 @@ const Category = ({
   setEditText,
   editIndex,
   setEditIndex,
+  handleToggleFinished,
 }: CategoryProps) => {
   return (
     <>
@@ -60,7 +62,18 @@ const Category = ({
             >
               <div className="flex gap-2 m-1 justify-between items-center">
                 <img className="size-5" src="./src/img/icon.png" alt="아이콘" />
-                <span>{todo.content}</span>
+                <input
+                  type="checkbox"
+                  checked={todo.isFinished}
+                  onChange={() => handleToggleFinished(todo.id)}
+                />
+                <span
+                  className={
+                    todo.isFinished ? 'line-through text-gray-400' : ''
+                  }
+                >
+                  {todo.content}
+                </span>
               </div>
 
               <div
