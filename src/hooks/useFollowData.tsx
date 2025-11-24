@@ -51,5 +51,11 @@ export const useFollowData = (userId: number) => {
     fetchFollowing();
   }, [userId]);
 
-  return { setFollower, follower, following, loadingFollower, loadingFollowing };
+  return {
+    setFollower,
+    follower,
+    following,
+    loadingFollower,
+    loadingFollowing,
+  };
 };
