@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { Todo } from '../routers/FeedPage';
 
 // FeedPage.tsx에서 정의한 props 함수의 타입 선언
 interface CalendarProps {
@@ -97,7 +98,7 @@ const Calender = ({
       <div className="flex justify-between mb-2">
         <button
           onClick={returnDate}
-          className="font-bold m-1 ml-9 cursor-pointer"
+          className="font-bold m-1 ml-5 cursor-pointer"
         >
           {currentYear}년 {currentMonth + 1}월
         </button>
@@ -140,7 +141,7 @@ const Calender = ({
                     dayObj.fullDate
                   );
                   return (
-                    <div className="mt-1 w-5 h-5 border-2 border-gray-300 flex items-center justify-center text-xs">
+                    <div className="mt-1 w-5 h-5 border-2 rounded-2xl border-gray-300 flex items-center justify-center text-xs">
                       {total === 0
                         ? ''
                         : total === finished

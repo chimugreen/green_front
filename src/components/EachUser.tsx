@@ -10,7 +10,7 @@ import FollowerList from '../userPage/FollowerList';
 import FollowingList from '../userPage/FollowingList';
 import { useFollowData } from '../hooks/useFollowData';
 import { useUserId } from '../useCase/useUserId';
-import { apiWithHeader } from './api';
+import { apiWithHeader } from '../api/api';
 
 interface EachUserProps {
   userId: number;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { api } from '../components/api';
+import { api } from '../api/api';
 
 interface User {
   id: number;
@@ -12,11 +12,11 @@ interface User {
 }
 
 const UserList = () => {
-    const [users, setUsers] = useState<User[]>([]);
-    
-    const fetchUsers = async() => {
-        const res = await api.get('/user')
-    }
+  const [users, setUsers] = useState<User[]>([]);
+
+  const fetchUsers = async () => {
+    const res = await api.get('/user');
+  };
 
   return (
     <div>

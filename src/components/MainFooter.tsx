@@ -6,7 +6,7 @@ export const MainFooter = () => {
   const navigate = useNavigate();
 
   return (
-    <footer className="absolute bottom-3 w-full overflow-hidden">
+    <footer>
       <div className="flex justify-center gap-10">
         <button
           className="cursor-pointer flex flex-col

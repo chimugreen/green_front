@@ -1,6 +1,8 @@
 // Category
 // 투두리스트
 
+import type { Todo } from '../routers/FeedPage';
+
 // Category props 타입 정의
 interface CategoryProps {
   inputText: string;
@@ -80,16 +82,16 @@ const Category = ({
                 className="flex items-center gap-2
                "
               >
-                {editIndex === index ? (
+                {editIndex === todo.id ? (
                   <>
                     <input
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
-                      className="border rounded p-1"
+                      className="border rounded p-1 bg-white"
                     />
                     <button
                       onClick={() => {
-                        handleUpdate(index, editText);
+                        handleUpdate(todo.id, editText);
                         setEditIndex(null);
                         setEditText('');
                       }}
@@ -100,8 +102,9 @@ const Category = ({
                 ) : (
                   <>
                     <button
+                      className="cursor-pointer hover:bg-gray-100 rounded-2xl p-1"
                       onClick={() => {
-                        setEditIndex(index);
+                        setEditIndex(todo.id);
                         setEditText(todo.content);
                       }}
                     >
@@ -111,7 +114,7 @@ const Category = ({
                 )}
 
                 <button
-                  onClick={() => handleDel(index)}
+                  onClick={() => handleDel(todo.id)}
                   className="cursor-pointer hover:bg-gray-100 rounded-2xl p-1"
                 >
                   삭제
