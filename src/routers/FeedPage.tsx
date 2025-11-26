@@ -8,7 +8,7 @@ export type Todo = {
   id: number; // 할일 번호
   content: string; // 할일 내용
   date: Date; // 할일 날짜
-  isFinished: boolean; // 할일 완료 여부
+  isDone: boolean; // 할일 완료 여부
 };
 
 const FeedPage = () => {
@@ -37,7 +37,7 @@ const FeedPage = () => {
       id: Date.now(), // 할일 번호
       content: trimmed,
       date: selectedDate, // 선택한 날짜
-      isFinished: false, // 기본 체크 여부 , 미완료상태
+      isDone: false, // 기본 체크 여부 , 미완료상태
     };
 
     setTodoList([...todoList, newTodo]);
@@ -67,7 +67,13 @@ const FeedPage = () => {
     // localStorage에서 ()안에 있는 값을 불러옴
     // .getItem > 불러오기
     if (saved) {
-      setTodoList(JSON.parse(saved));
+      const parsed: Todo[] = JSON.parse(saved);
+      // 문자열을 Date 객체로 변환
+      const withDates = parsed.map((todo) => ({
+        ...todo,
+        date: new Date(todo.date),
+      }));
+      setTodoList(withDates);
     }
   }, []);
 
@@ -89,7 +95,7 @@ const FeedPage = () => {
   const handleToggleFinished = (id: number) => {
     setTodoList(
       todoList.map((todo) =>
-        todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
       )
     );
   };
@@ -98,7 +104,7 @@ const FeedPage = () => {
     <>
       <header className="flex">
         <img
-          className="ml-10 mb-10 size-10"
+          className="ml-10 mt-5 mb-10 size-10"
           src="src\img\icon.png"
           alt="mainLogo"
         />

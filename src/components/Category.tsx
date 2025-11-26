@@ -66,13 +66,11 @@ const Category = ({
                 <img className="size-5" src="./src/img/icon.png" alt="아이콘" />
                 <input
                   type="checkbox"
-                  checked={todo.isFinished}
+                  checked={todo.isDone}
                   onChange={() => handleToggleFinished(todo.id)}
                 />
                 <span
-                  className={
-                    todo.isFinished ? 'line-through text-gray-400' : ''
-                  }
+                  className={todo.isDone ? 'line-through text-gray-400' : ''}
                 >
                   {todo.content}
                 </span>

@@ -87,7 +87,7 @@ const Calender = ({
     });
 
     const total = todosForDate.length;
-    const finished = todosForDate.filter((t) => t.isFinished).length;
+    const finished = todosForDate.filter((t) => t.isDone).length;
 
     return { total, finished };
   };
