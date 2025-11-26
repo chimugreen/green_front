@@ -15,12 +15,13 @@ export const addTodo = async (
   isDone: boolean
 ) => {
   try {
+    const token = localStorage.getItem('AccessToken');
     const response = await api.post(
       '/todos',
       {
-        content: content,
+        content,
         schedule: schedule.toISOString().split('T')[0],
-        isDone: isDone,
+        isDone,
       },
       {
         headers: {
@@ -31,17 +32,12 @@ export const addTodo = async (
 
     const data = response.data;
 
-    // ⭐ FE에서 쓰는 Todo 형태로 변환
-    const converted = {
+    return {
       id: data.id,
       content: data.content,
-      schedule: data.schedule ? new Date(data.schedule) : null,
-      isDone: data.done, // <--- 여기!
+      schedule: data.schedule ? new Date(data.schedule) : new Date(),
+      isDone: data.done,
     };
-
-    console.log('추가 성공 변환:', converted);
-
-    return converted; // FE는 이걸 받음
   } catch (error) {
     console.log('추가 실패', error.response?.data || error.message);
   }
@@ -50,6 +46,7 @@ export const addTodo = async (
 // get = 조회
 export const getTodos = async () => {
   try {
+    const token = localStorage.getItem('AccessToken'); // <-- 여기서 가져오기
     const response = await api.get('/todos', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -58,11 +55,10 @@ export const getTodos = async () => {
 
     const list = response.data;
 
-    // 리스트도 변환 필요
     const convertedList = list.map((item: any) => ({
       id: item.id,
       content: item.content,
-      schedule: item.schedule ? new Date(item.schedule) : null,
+      schedule: item.schedule ? new Date(item.schedule) : new Date(), // 기본값 오늘
       isDone: item.done,
     }));
 
@@ -70,6 +66,18 @@ export const getTodos = async () => {
   } catch (error) {
     console.error('조회 실패:', error);
     throw error;
+  }
+};
+
+// delete = 삭제
+export const delTodo = async (todoId: number) => {
+  try {
+    // DELETE 요청: /todos/{id} 형태로 서버에 요청
+    const response = await api.delete(`/todos/${todoId}`);
+
+    console.log('삭제 성공:', response.data);
+  } catch (error) {
+    console.error('삭제 실패:', error);
   }
 };
 
@@ -84,15 +92,3 @@ export const getTodos = async () => {
 //         console.log("수정 실패");
 //     }
 // }
-
-// delete = 삭제
-export const delTodo = async (todoId: number) => {
-  try {
-    // DELETE 요청: /todos/{id} 형태로 서버에 요청
-    const response = await api.delete(`/todos/${todoId}`);
-
-    console.log('삭제 성공:', response.data);
-  } catch (error) {
-    console.error('삭제 실패:', error);
-  }
-};

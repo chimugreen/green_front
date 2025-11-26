@@ -1,5 +1,3 @@
-// 피드 page
-
 import { useEffect, useState } from 'react';
 import Calender from '../components/Calender';
 import Category from '../components/Category';
@@ -24,11 +22,7 @@ const FeedPage = () => {
   // Calender.tsx props
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  //? Category
-  // TODOS 배열
-  // Todo는 아래의 내용을 가지고 있는 객체
-
-  //입력창 text 상태관리
+  // 입력창 text 상태관리
   const [inputText, setInputText] = useState('');
   // 리스트 저장 - 배열
   const [todoList, setTodoList] = useState<Todo[]>([]);
@@ -46,15 +40,21 @@ const FeedPage = () => {
       const response = await addTodo(trimmed, selectedDate, false);
       if (!response) return;
 
+      // 서버 응답 → FE 타입 변환
       const newTodo: Todo = {
         id: response.id,
         content: response.content,
-        schedule: response.schedule
-          ? new Date(response.schedule)
-          : selectedDate,
-        isDone: response.done,
+        // Invalid Date 방지, null 대신 selectedDate fallback
+        schedule:
+          response.schedule instanceof Date &&
+          !isNaN(response.schedule.getTime())
+            ? response.schedule
+            : new Date(selectedDate),
+        // isDone undefined 방지
+        isDone: typeof response.isDone === 'boolean' ? response.isDone : false,
       };
 
+      // 상태에 추가 → 바로 화면에 반영
       setTodoList((prev) => [...prev, newTodo]);
       setInputText('');
       console.log('추가 완료:', newTodo);
@@ -64,7 +64,6 @@ const FeedPage = () => {
   };
 
   // 삭제버튼
-  // 삭제는 filter를 이용해서 항목삭제
   const handleDel = async (todoId: number) => {
     try {
       // 서버에 DELETE 요청
@@ -80,8 +79,6 @@ const FeedPage = () => {
   };
 
   // 수정버튼
-  // 수정 시, map을 이용해서 재배열
-  // indexToUpdate => 수정할 index , newText: 교체할 내용
   const handleUpdate = (indexToUpdate: number, newText: string) => {
     setTodoList(
       todoList.map((todo) =>
@@ -90,17 +87,20 @@ const FeedPage = () => {
     );
   };
 
+  // 서버에서 todo 불러오기
   useEffect(() => {
     const loadTodos = async () => {
       try {
         const data = await getTodos();
 
-        // 백엔드 응답 → FE 타입 변환
-        const parsed = data.map((todo: TodoResponse) => ({
+        const parsed = data.map((todo: any) => ({
           id: todo.id,
           content: todo.content,
-          schedule: new Date(todo.schedule),
-          isDone: todo.done,
+          // Invalid Date 방지
+          schedule: todo.schedule
+            ? new Date(`${todo.schedule}T00:00:00`)
+            : new Date(),
+          isDone: typeof todo.isDone === 'boolean' ? todo.isDone : false,
         }));
 
         setTodoList(parsed);
@@ -115,7 +115,9 @@ const FeedPage = () => {
   // 선택된 날짜(selectedDate)와 동일한 날짜를 가진 todo만 필터링
   const todosForSelectedDate = todoList.filter(
     (todo) =>
-      new Date(todo.schedule).toDateString() === selectedDate.toDateString()
+      todo.schedule.getFullYear() === selectedDate.getFullYear() &&
+      todo.schedule.getMonth() === selectedDate.getMonth() &&
+      todo.schedule.getDate() === selectedDate.getDate()
   );
 
   // 완료표시 여부
@@ -136,9 +138,6 @@ const FeedPage = () => {
           alt="mainLogo"
         />
       </header>
-      {/* <div className="border-2 w-1/3 flex justify-start ml-15 mt-10 mb-5">
-        유저이미지
-      </div> */}
       <div className="flex justify-around items-center h-full ">
         <div className="w-1/3 min-h-100 h-auto flex flex-col rounded-2xl">
           <div>
@@ -150,10 +149,10 @@ const FeedPage = () => {
           </div>
         </div>{' '}
         <div className="w-1/2 max-h-150 min-h-100 h-auto flex flex-col p-2 bg-neutral-50 rounded-2xl">
-          <Category // Category에 있던 todo 기능 정의 전부 feedPage로 올림, 전부 전달해야됨
+          <Category
             inputText={inputText} // 추가내용
             setInputText={setInputText} // 추가내용
-            todoList={todosForSelectedDate}
+            todoList={todosForSelectedDate} // 필터된 리스트
             handleAdd={handleAdd} // 추가버튼
             handleDel={handleDel} // 삭제버튼
             handleUpdate={handleUpdate} // 수정버튼
