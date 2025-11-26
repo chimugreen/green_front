@@ -1,15 +1,15 @@
 import { VscAccount, VscSearch, VscBell } from 'react-icons/vsc';
 import { IoHomeOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { userInfoStorage } from '../../utils/userInfoStorage';
+// import { userInfoStorage } from '../../utils/userInfoStorage';
 
 export const MainFooter = () => {
   const navigate = useNavigate();
-  const myId = userInfoStorage.getUserId();
+  // const myId = userInfoStorage.getUserId();
 
   return (
-    <footer className="absolute bottom-3 w-full overflow-hidden">
-      <div className="flex justify-center gap-10">
+    <footer className="fixed bottom-0 w-full overflow-hidden bg-white">
+      <div className="flex justify-center gap-10 py-4">
         <button
           className="cursor-pointer flex flex-col
            items-center text-gray-700 font-bold"

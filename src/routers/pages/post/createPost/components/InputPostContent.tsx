@@ -23,7 +23,7 @@ export const InputPostContent = ({
           onChange={(e) => setContent(e.target.value)}
         />
         <div
-          className="bg-red-200 text-gray-500 px-4 py-2 rounded-md text-center"
+          className="bg-red-200 text-gray-500 px-4 py-2 rounded-md text-center cursor-pointer"
           onClick={() => onClickUpload(content)}
         >
           게시

@@ -1,5 +1,5 @@
 import { MdOutlineAddToPhotos } from 'react-icons/md';
-import { use, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 type SelectPostImageProps = {
   onClickNext: (imageUrl: string, file: File) => void;

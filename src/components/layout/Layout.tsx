@@ -3,7 +3,9 @@ import { MainFooter } from './MainFooter';
 export const Layout = () => {
   return (
     <div>
-      <Outlet />
+      <div className="pb-[72px]">
+        <Outlet />
+      </div>
       <MainFooter />
     </div>
   );

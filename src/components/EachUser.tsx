@@ -11,16 +11,105 @@ import FollowingList from '../userPage/FollowingList';
 import { useUserId } from '../useCase/useUserId';
 import { apiWithHeader } from './api';
 import { userInfoStorage } from '../utils/userInfoStorage';
+import { PostList } from '../routers/pages/post/createPost/components/PostList';
+import type { PostData } from './post/EachPost';
 
 interface EachUserProps {
   userId: number;
 }
 
+const mockPosts: PostData[] = [
+  {
+    user: {
+      name: 'jiyun',
+      profileImageUrl: 'https://picsum.photos/seed/user1/200',
+    },
+    post: {
+      id: 1,
+      imageUrl: 'https://picsum.photos/seed/post1/600',
+      content: '오늘 카페에서 공부했어 ☕️',
+      likeCnt: 12,
+      commentCnt: 3,
+      createdAt: new Date('2025-01-01T10:20:00'),
+    },
+  },
+  {
+    user: {
+      name: 'haru',
+      profileImageUrl: 'https://picsum.photos/seed/user2/200',
+    },
+    post: {
+      id: 2,
+      imageUrl: 'https://picsum.photos/seed/post2/600',
+      content: '새해 첫 등산! 🧗‍♀️',
+      likeCnt: 25,
+      commentCnt: 5,
+      createdAt: new Date('2025-01-03T14:10:00'),
+    },
+  },
+  {
+    user: {
+      name: 'maki',
+      profileImageUrl: 'https://picsum.photos/seed/user3/200',
+    },
+    post: {
+      id: 3,
+      imageUrl: 'https://picsum.photos/seed/post3/600',
+      content: '고양이 너무 귀여워 😺',
+      likeCnt: 40,
+      commentCnt: 8,
+      createdAt: new Date('2025-01-05T09:00:00'),
+    },
+  },
+  {
+    user: {
+      name: 'tomo',
+      profileImageUrl: 'https://picsum.photos/seed/user4/200',
+    },
+    post: {
+      id: 4,
+      imageUrl: 'https://picsum.photos/seed/post4/600',
+      content: '오늘은 헬스장에서 땀 좀 뺐다 💪',
+      likeCnt: 18,
+      commentCnt: 1,
+      createdAt: new Date('2025-01-07T18:30:00'),
+    },
+  },
+  {
+    user: {
+      name: 'yuri',
+      profileImageUrl: 'https://picsum.photos/seed/user5/200',
+    },
+    post: {
+      id: 5,
+      imageUrl: 'https://picsum.photos/seed/post5/600',
+      content: '도쿄 야경 너무 예쁘다 🌃',
+      likeCnt: 33,
+      commentCnt: 6,
+      createdAt: new Date('2025-01-09T21:45:00'),
+    },
+  },
+  {
+    user: {
+      name: 'min',
+      profileImageUrl: 'https://picsum.photos/seed/user6/200',
+    },
+    post: {
+      id: 6,
+      imageUrl: 'https://picsum.photos/seed/post6/600',
+      content: '요즘 공부 재미있다 📚',
+      likeCnt: 9,
+      commentCnt: 0,
+      createdAt: new Date('2025-01-12T08:20:00'),
+    },
+  },
+];
+
 // 개인 페이지
 const EachUser = ({ userId }: EachUserProps) => {
   const loadUserId = Number(userId);
   // 임시 유저페이지 사진보여줌
-  const images = [feedPic, fPic, mala];
+  // const images = [feedPic, fPic, mala];
   const navigate = useNavigate();
 
   const { setLoadedUserData, loadedUserData, isLoading } =
@@ -39,7 +128,6 @@ const EachUser = ({ userId }: EachUserProps) => {
   const handleFollow = async () => {
     if (loadedUserData?.isFollowing) {
       // unfollow
-
       const res = await apiWithHeader.post(`user/unfollow`, {
         userId: loadUserId,
       });
@@ -56,11 +144,9 @@ const EachUser = ({ userId }: EachUserProps) => {
       }
     } else {
       // follow
-      // 팔로우 처리
       const res = await apiWithHeader.post(`user/follow`, {
         userId: loadUserId,
       });
-
       if (res.status == 200) {
         setLoadedUserData((pre) =>
           pre
@@ -116,7 +202,7 @@ const EachUser = ({ userId }: EachUserProps) => {
       {/* 상단 회원 정보 */}
       <div className="flex max-w-120 items-center">
         <img
-          src={logo}
+          src={loadedUserData?.profileImageUrl}
           alt="프로필 사진"
           className="size-25 float-start mx-3"
         />
@@ -146,7 +232,8 @@ const EachUser = ({ userId }: EachUserProps) => {
           </div>
           <p className="text-gray-600 text-sm">{loadedUserData?.email}</p>
           <div className="flex text-sm py-0.5">
-            <p>게시물</p> <p className="font-bold px-1">{images.length}</p>
+            <p>게시물</p>{' '}
+            <p className="font-bold px-1">{loadedUserData?.postCount}</p>
             <p>팔로워</p>
             <p
               onClick={() => setIsOpenedFollowerList(true)}
@@ -196,16 +283,10 @@ const EachUser = ({ userId }: EachUserProps) => {
         </div>
       </div>
       {/* 사진 게시물 */}
-      <div className="grid grid-flow-row grid-cols-3 mt-3">
-        {images.map((c, idx) => (
-          <div key={idx}>
-            <img
-              src={c}
-              className="border border-gray-100 h-full object-cover rounded-xl cursor-pointer"
-            />
-          </div>
-        ))}
+      <div className="mt-4">
+        <PostList posts={mockPosts} />
       </div>
+      {/* 팔로잉&팔로워 리스트 */}
       <FollowerList
         open={isOpenedFollowerList}
         onClose={() => setIsOpenedFollowerList(false)}

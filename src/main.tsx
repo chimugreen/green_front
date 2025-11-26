@@ -10,6 +10,7 @@ import MainLoginPage from './loginPage/MainLoginPage';
 import LoginPage from './loginPage/LoginPage';
 import SignupPage from './loginPage/SignupPage';
 import CreatePost from './routers/pages/post/createPost/CreatePost';
+// import EachPost from './components/EachPost';
 
 const router = createBrowserRouter([
   // 로그인 전
@@ -27,8 +28,7 @@ const router = createBrowserRouter([
       // 추가 페이지
       { path: '/createpost', element: <CreatePost /> },
       { path: '/user/:userId', element: <MyPage /> },
-      // 추가 페이지
-      { path: '/createpost', element: <CreatePost /> },
+      // { path: '/post/:postId', element: <EachPost /> },
     ],
   },
 ]);

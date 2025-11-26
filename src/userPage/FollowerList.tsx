@@ -12,10 +12,6 @@ function FollowerList({ open, onClose, userId }: ModalProps) {
   const { follower, loadingFollower } = useFollowData(userId);
   const navigate = useNavigate();
 
-  // const goUserPage = () => {
-  //   navigate(`/user/${userId}`);
-  //   onclick={onclose}
-  // }
   if (!open) return null;
 
   return (

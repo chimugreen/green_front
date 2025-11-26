@@ -5,6 +5,7 @@ import { userInfoStorage } from '../utils/userInfoStorage';
 const MyPage = () => {
   const { userId } = useParams<{ userId: string }>();
   const myId = Number(userInfoStorage.getUserId());
+  const loadUserId = userId ? Number(userId) : myId;
   const navigate = useNavigate();
 
   if (!myId) {
@@ -12,7 +13,6 @@ const MyPage = () => {
     navigate('/login');
     return;
   }
-  const loadUserId = userId ? Number(userId) : myId;
 
   return <EachUser userId={loadUserId} />;
 };
