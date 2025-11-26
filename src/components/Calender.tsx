@@ -78,7 +78,7 @@ const Calender = ({
   // 특정 날짜의 todo 상태 계산
   const getTodoStatusForDate = (date: Date) => {
     const todosForDate = todoList.filter((todo) => {
-      const todoDate = new Date(todo.date); // 문자열을 Date로 변환
+      const todoDate = new Date(todo.schedule); // 문자열을 Date로 변환
       return (
         todoDate.getFullYear() === date.getFullYear() &&
         todoDate.getMonth() === date.getMonth() &&

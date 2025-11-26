@@ -7,7 +7,7 @@ import Category from '../components/Category';
 export type Todo = {
   id: number; // 할일 번호
   content: string; // 할일 내용
-  date: Date; // 할일 날짜
+  schedule: Date; // 할일 날짜
   isDone: boolean; // 할일 완료 여부
 };
 
@@ -36,7 +36,7 @@ const FeedPage = () => {
     const newTodo: Todo = {
       id: Date.now(), // 할일 번호
       content: trimmed,
-      date: selectedDate, // 선택한 날짜
+      schedule: selectedDate, // 선택한 날짜
       isDone: false, // 기본 체크 여부 , 미완료상태
     };
 
@@ -71,7 +71,7 @@ const FeedPage = () => {
       // 문자열을 Date 객체로 변환
       const withDates = parsed.map((todo) => ({
         ...todo,
-        date: new Date(todo.date),
+        date: new Date(todo.schedule),
       }));
       setTodoList(withDates);
     }
@@ -86,9 +86,9 @@ const FeedPage = () => {
   // 선택된 날짜(selectedDate)와 동일한 날짜를 가진 todo만 필터링
   const todosForSelectedDate = todoList.filter(
     (todo) =>
-      todo.date.getFullYear() === selectedDate.getFullYear() &&
-      todo.date.getMonth() === selectedDate.getMonth() &&
-      todo.date.getDate() === selectedDate.getDate()
+      todo.schedule.getFullYear() === selectedDate.getFullYear() &&
+      todo.schedule.getMonth() === selectedDate.getMonth() &&
+      todo.schedule.getDate() === selectedDate.getDate()
   );
 
   // 완료표시 여부
