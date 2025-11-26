@@ -9,8 +9,8 @@ interface CategoryProps {
   setInputText: React.Dispatch<React.SetStateAction<string>>;
   todoList: Todo[];
   handleAdd: () => void;
-  handleDel: (index: number) => void;
-  handleUpdate: (index: number, newText: string) => void;
+  handleDel: (id: number) => void;
+  handleUpdate: (id: number, newText: string) => void;
   editText: string;
   setEditText: React.Dispatch<React.SetStateAction<string>>;
   editIndex: number | null;
@@ -57,10 +57,10 @@ const Category = ({
       <div>
         <ul className="bg-amber-50 rounded-2xl">
           {/* todolist 배열 map으로 렌더링 */}
-          {todoList.map((todo, index) => (
+          {todoList.map((todo) => (
             <li
               className="flex gap-2 m-1 justify-between items-center"
-              key={index}
+              key={todo.id}
             >
               <div className="flex gap-2 m-1 justify-between items-center">
                 <img className="size-5" src="./src/img/icon.png" alt="아이콘" />

@@ -3,12 +3,21 @@
 import { useEffect, useState } from 'react';
 import Calender from '../components/Calender';
 import Category from '../components/Category';
+import { addTodo, getTodos } from '../api/axios';
 
 export type Todo = {
   id: number; // 할일 번호
   content: string; // 할일 내용
   schedule: Date; // 할일 날짜
   isDone: boolean; // 할일 완료 여부
+};
+
+// 서버 응답용 타입
+export type TodoResponse = {
+  id: number;
+  content: string;
+  schedule: string; // 문자열
+  done: boolean;
 };
 
 const FeedPage = () => {
@@ -29,19 +38,29 @@ const FeedPage = () => {
   const [editIndex, setEditIndex] = useState<number | null>(null); //수정 중인 항목의 인덱스 (null일 경우 수정x)
 
   // 할일 추가 버튼
-  const handleAdd = () => {
+  const handleAdd = async () => {
     const trimmed = inputText.trim();
-    if (trimmed === '') return;
+    if (!trimmed) return;
 
-    const newTodo: Todo = {
-      id: Date.now(), // 할일 번호
-      content: trimmed,
-      schedule: selectedDate, // 선택한 날짜
-      isDone: false, // 기본 체크 여부 , 미완료상태
-    };
+    try {
+      const response = await addTodo(trimmed, selectedDate, false);
+      if (!response) return;
 
-    setTodoList([...todoList, newTodo]);
-    setInputText('');
+      const newTodo: Todo = {
+        id: response.id,
+        content: response.content,
+        schedule: response.schedule
+          ? new Date(response.schedule)
+          : selectedDate,
+        isDone: response.done,
+      };
+
+      setTodoList((prev) => [...prev, newTodo]);
+      setInputText('');
+      console.log('추가 완료:', newTodo);
+    } catch (error) {
+      console.log('추가 실패:', error);
+    }
   };
 
   // 삭제버튼
@@ -61,34 +80,32 @@ const FeedPage = () => {
     );
   };
 
-  // 새로고침 유지
   useEffect(() => {
-    const saved = localStorage.getItem('todoList');
-    // localStorage에서 ()안에 있는 값을 불러옴
-    // .getItem > 불러오기
-    if (saved) {
-      const parsed: Todo[] = JSON.parse(saved);
-      // 문자열을 Date 객체로 변환
-      const withDates = parsed.map((todo) => ({
-        ...todo,
-        date: new Date(todo.schedule),
-      }));
-      setTodoList(withDates);
-    }
-  }, []);
+    const loadTodos = async () => {
+      try {
+        const data = await getTodos();
 
-  useEffect(() => {
-    //? localStorage.setItem(); => () 안에 있는 data를 localStorage에 저장, 문자열만 저장 가능
-    //? JSON.stringify() > 객체를 문자열로 변환하는 문법
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-  }, [todoList]);
+        // 백엔드 응답 → FE 타입 변환
+        const parsed = data.map((todo: TodoResponse) => ({
+          id: todo.id,
+          content: todo.content,
+          schedule: new Date(todo.schedule),
+          isDone: todo.done,
+        }));
+
+        setTodoList(parsed);
+      } catch (e) {
+        console.log('서버에서 todo 로드 실패:', e);
+      }
+    };
+
+    loadTodos();
+  }, []);
 
   // 선택된 날짜(selectedDate)와 동일한 날짜를 가진 todo만 필터링
   const todosForSelectedDate = todoList.filter(
     (todo) =>
-      todo.schedule.getFullYear() === selectedDate.getFullYear() &&
-      todo.schedule.getMonth() === selectedDate.getMonth() &&
-      todo.schedule.getDate() === selectedDate.getDate()
+      new Date(todo.schedule).toDateString() === selectedDate.toDateString()
   );
 
   // 완료표시 여부
