@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import { apiWithHeader } from '../components/api';
-import { useUserId } from './useUserId';
 
-type Post = {
+export type Post = {
   id: number;
   content: string;
   createdAt: string;
   imageUrl: string;
   userId: number;
+  username: string;
+  profileImageUrl: string;
+  likesCnt: number;
+  commentsCnt: number;
 };
 
-type Pagenation = {
+export type Pagenation = {
   page: number;
   size: number;
   totalElements: number;
@@ -36,7 +39,7 @@ export const useGetPost = ({ userId, page, size }: UseGetPostParams) => {
   // const { setLoadedUserData, loadedUserData, isLoading } = useUserId(userId);
 
   const loadPosts = useCallback(async () => {
-    if (!userId) return;
+    if (!userId && userId !== 0) return;
     try {
       setIsLoading(true);
       const res = await apiWithHeader.post<UserPostRes>('/post/user', {
@@ -44,7 +47,8 @@ export const useGetPost = ({ userId, page, size }: UseGetPostParams) => {
         page,
         size,
       });
-      setPosts(res.data.posts);
+      setPosts((prev) =>
+        page === 0 ? res.data.posts : [...prev, ...res.data.posts]);
       setPagenation(res.data.pagenation);
     } catch (error) {
       console.error(error);

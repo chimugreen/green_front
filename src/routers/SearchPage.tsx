@@ -1,6 +1,8 @@
 // 둘러보기 - 탐색 페이지
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { EachPost, type PostData } from '../components/post/EachPost';
+import { useGetPost } from '../useCase/useGetPost';
+import { useEffect, useRef, useState } from 'react';
 
 const mockPosts: PostData[] = [
   {
@@ -12,8 +14,8 @@ const mockPosts: PostData[] = [
       id: 1,
       imageUrl: 'https://picsum.photos/seed/post1/600',
       content: '오늘 카페에서 공부했어 ☕️',
-      likeCnt: 12,
-      commentCnt: 3,
+      likesCnt: 12,
+      commentsCnt: 3,
       createdAt: new Date('2025-01-01T10:20:00'),
     },
   },
@@ -26,8 +28,8 @@ const mockPosts: PostData[] = [
       id: 2,
       imageUrl: 'https://picsum.photos/seed/post2/600',
       content: '새해 첫 등산! 🧗‍♀️',
-      likeCnt: 25,
-      commentCnt: 5,
+      likesCnt: 25,
+      commentsCnt: 5,
       createdAt: new Date('2025-01-03T14:10:00'),
     },
   },
@@ -40,8 +42,8 @@ const mockPosts: PostData[] = [
       id: 3,
       imageUrl: 'https://picsum.photos/seed/post3/600',
       content: '고양이 너무 귀여워 😺',
-      likeCnt: 40,
-      commentCnt: 8,
+      likesCnt: 40,
+      commentsCnt: 8,
       createdAt: new Date('2025-01-05T09:00:00'),
     },
   },
@@ -54,8 +56,8 @@ const mockPosts: PostData[] = [
       id: 4,
       imageUrl: 'https://picsum.photos/seed/post4/600',
       content: '오늘은 헬스장에서 땀 좀 뺐다 💪',
-      likeCnt: 18,
-      commentCnt: 1,
+      likesCnt: 18,
+      commentsCnt: 1,
       createdAt: new Date('2025-01-07T18:30:00'),
     },
   },
@@ -68,8 +70,8 @@ const mockPosts: PostData[] = [
       id: 5,
       imageUrl: 'https://picsum.photos/seed/post5/600',
       content: '도쿄 야경 너무 예쁘다 🌃',
-      likeCnt: 33,
-      commentCnt: 6,
+      likesCnt: 33,
+      commentsCnt: 6,
       createdAt: new Date('2025-01-09T21:45:00'),
     },
   },
@@ -82,8 +84,8 @@ const mockPosts: PostData[] = [
       id: 6,
       imageUrl: 'https://picsum.photos/seed/post6/600',
       content: '요즘 공부 재미있다 📚',
-      likeCnt: 9,
-      commentCnt: 0,
+      likesCnt: 9,
+      commentsCnt: 0,
       createdAt: new Date('2025-01-12T08:20:00'),
     },
   },
@@ -91,6 +93,7 @@ const mockPosts: PostData[] = [
 
 const SearchPage = () => {
   const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
 
   return (
     <div className="my-1 mx-auto max-w-120">
@@ -100,7 +103,9 @@ const SearchPage = () => {
           <button
             className="font-bold float-right cursor-pointer"
             onClick={() => navigate('/createPost')}
-          >+</button>
+          >
+            +
+          </button>
         </div>
       </div>
       <div>

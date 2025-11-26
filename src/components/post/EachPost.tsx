@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
 import { CgComment } from 'react-icons/cg';
+import CommentModal from '../CommentModal';
+import type { Post } from '../../useCase/useGetPost';
+import { useUserId } from '../../useCase/useUserId';
+import logo from '../../img/icon.png';
 
 export type PostData = {
   user: {
@@ -12,18 +16,24 @@ export type PostData = {
     id: number;
     imageUrl: string;
     content: string;
-    likeCnt: number;
-    commentCnt: number;
+    likesCnt: number;
+    commentsCnt: number;
     createdAt: Date;
   };
 };
 
-type EachPostProps = {
+type EachPostDataProps = {
   postData: PostData;
 };
 
+// type EachPostProps = {
+//   post: Post;
+// }
+
 // 인스타 게시글 1개
-export const EachPost = ({ postData }: EachPostProps) => {
+export const EachPost = ({ postData }: EachPostDataProps) => {
+  const { userId } = useParams<{ userId: string }>();
+  const { setLoadedUserData, loadedUserData, isLoading } = useUserId(userId);
   // 댓글창, 댓글, 좋아요
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
@@ -60,9 +70,9 @@ export const EachPost = ({ postData }: EachPostProps) => {
       <div className="flex items-center w-screen max-w-100 p-2">
         <img
           className="size-10 float-left rounded-full cursor-pointer"
-          src={postData.post.imageUrl}
+          src={postData.user.profileImageUrl}
           alt="프로필 사진"
-          onClick={() => navigate(`/user/${userId}`)}
+          onClick={() => navigate(`/user/${postData.user.profileImageUrl}`)}
         />
         <p className="font-bold px-2">{postData.user.name}</p>
       </div>
@@ -73,9 +83,9 @@ export const EachPost = ({ postData }: EachPostProps) => {
           <button className="cursor-pointer" onClick={handleLike}>
             {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </button>
-          <p className="font-bold">{postData.post.likeCnt}</p>
+          <p className="font-bold">{postData.post.likesCnt}</p>
           <CgComment onClick={handleCommentList} className="cursor-pointer" />
-          <p>{postData.post.commentCnt}</p>
+          <p>{postData.post.commentsCnt}</p>
         </div>
         <div className="flex max-w-100 w-screen px-2">
           <span className="font-bold pr-2">{postData.user.name}</span>
@@ -97,6 +107,20 @@ export const EachPost = ({ postData }: EachPostProps) => {
             게시
           </button>
         </div>
+        <CommentModal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <div className="">
+            <div>
+              <p className="font-bold text-center w-full p-3">댓글</p>
+              <div className="w-full my-2 p-3 rounded-md bg-white">
+                <div className="flex">
+                  <img src={logo} />
+                  <p>닉네임</p>
+                  <p>코멘트</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CommentModal>
       </div>
     </div>
   );
