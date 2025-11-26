@@ -18,6 +18,26 @@ export type TodoResponse = {
   done: boolean;
 };
 
+// 날짜 문자열("YYYY-MM-DD") → Date 객체 변환 (시간대 영향 제거)
+const parseDate = (
+  schedule: string | Date | undefined | null,
+  fallback: Date
+) => {
+  if (!schedule) return fallback;
+  if (typeof schedule === 'string') {
+    const [year, month, day] = schedule.split('-').map(Number);
+    return new Date(year, month - 1, day); // 월은 0부터 시작
+  }
+  if (schedule instanceof Date) {
+    return new Date(
+      schedule.getFullYear(),
+      schedule.getMonth(),
+      schedule.getDate()
+    );
+  }
+  return fallback;
+};
+
 const FeedPage = () => {
   // Calender.tsx props
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -44,15 +64,10 @@ const FeedPage = () => {
       const newTodo: Todo = {
         id: response.id,
         content: response.content,
-        // 선택한 날짜 기준으로 시간 00:00:00 초기화
+        // parseDate 사용 → 시간대 문제 해결
         schedule:
-          response.schedule instanceof Date &&
-          !isNaN(response.schedule.getTime())
-            ? new Date(
-                response.schedule.getFullYear(),
-                response.schedule.getMonth(),
-                response.schedule.getDate()
-              )
+          typeof response.schedule === 'string'
+            ? parseDate(response.schedule, selectedDate)
             : new Date(
                 selectedDate.getFullYear(),
                 selectedDate.getMonth(),
@@ -60,6 +75,7 @@ const FeedPage = () => {
               ),
         isDone: typeof response.isDone === 'boolean' ? response.isDone : false,
       };
+
       // 상태에 추가 → 바로 화면에 반영
       setTodoList((prev) => [...prev, newTodo]);
       setInputText('');
@@ -99,13 +115,8 @@ const FeedPage = () => {
         const parsed = data.map((todo: any) => ({
           id: todo.id,
           content: todo.content,
-          schedule: todo.schedule
-            ? new Date(
-                new Date(todo.schedule).getFullYear(),
-                new Date(todo.schedule).getMonth(),
-                new Date(todo.schedule).getDate()
-              )
-            : new Date(),
+          // parseDate 사용 → GET 시에도 시간대 문제 제거
+          schedule: parseDate(todo.schedule, new Date()),
           isDone: typeof todo.isDone === 'boolean' ? todo.isDone : false,
         }));
 
