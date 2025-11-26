@@ -44,16 +44,22 @@ const FeedPage = () => {
       const newTodo: Todo = {
         id: response.id,
         content: response.content,
-        // Invalid Date 방지, null 대신 selectedDate fallback
+        // 선택한 날짜 기준으로 시간 00:00:00 초기화
         schedule:
           response.schedule instanceof Date &&
           !isNaN(response.schedule.getTime())
-            ? response.schedule
-            : new Date(selectedDate),
-        // isDone undefined 방지
+            ? new Date(
+                response.schedule.getFullYear(),
+                response.schedule.getMonth(),
+                response.schedule.getDate()
+              )
+            : new Date(
+                selectedDate.getFullYear(),
+                selectedDate.getMonth(),
+                selectedDate.getDate()
+              ),
         isDone: typeof response.isDone === 'boolean' ? response.isDone : false,
       };
-
       // 상태에 추가 → 바로 화면에 반영
       setTodoList((prev) => [...prev, newTodo]);
       setInputText('');
@@ -96,9 +102,12 @@ const FeedPage = () => {
         const parsed = data.map((todo: any) => ({
           id: todo.id,
           content: todo.content,
-          // Invalid Date 방지
           schedule: todo.schedule
-            ? new Date(`${todo.schedule}T00:00:00`)
+            ? new Date(
+                new Date(todo.schedule).getFullYear(),
+                new Date(todo.schedule).getMonth(),
+                new Date(todo.schedule).getDate()
+              )
             : new Date(),
           isDone: typeof todo.isDone === 'boolean' ? todo.isDone : false,
         }));
