@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Calender from '../components/Calender';
 import Category from '../components/Category';
-import { addTodo, getTodos } from '../api/axios';
+import { addTodo, delTodo, getTodos } from '../api/axios';
 
 export type Todo = {
   id: number; // 할일 번호
@@ -65,8 +65,18 @@ const FeedPage = () => {
 
   // 삭제버튼
   // 삭제는 filter를 이용해서 항목삭제
-  const handleDel = (todoId: number) => {
-    setTodoList(todoList.filter((todo) => todo.id !== todoId));
+  const handleDel = async (todoId: number) => {
+    try {
+      // 서버에 DELETE 요청
+      await delTodo(todoId);
+
+      // FE 상태에서 해당 Todo 제거
+      setTodoList((prev) => prev.filter((todo) => todo.id !== todoId));
+
+      console.log('삭제 완료:', todoId);
+    } catch (error) {
+      console.error('삭제 실패:', error);
+    }
   };
 
   // 수정버튼

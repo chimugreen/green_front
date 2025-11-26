@@ -85,14 +85,14 @@ export const getTodos = async () => {
 //     }
 // }
 
-// // delete = 삭제
-// const delTodo = async () => {
-//     try {
-//         const response = await api.delete(, {
+// delete = 삭제
+export const delTodo = async (todoId: number) => {
+  try {
+    // DELETE 요청: /todos/{id} 형태로 서버에 요청
+    const response = await api.delete(`/todos/${todoId}`);
 
-//         })
-//         console.log("삭제 성공");
-//     } catch (error) {
-//         console.log("삭제 실패");
-//     }
-// }
+    console.log('삭제 성공:', response.data);
+  } catch (error) {
+    console.error('삭제 실패:', error);
+  }
+};
