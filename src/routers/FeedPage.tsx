@@ -72,15 +72,12 @@ const FeedPage = () => {
   // 삭제버튼
   const handleDel = async (todoId: number) => {
     try {
-      // 서버에 DELETE 요청
-      await delTodo(todoId);
-
-      // FE 상태에서 해당 Todo 제거
+      await delTodo(todoId); // 서버 삭제
+      // 서버 삭제 성공 후에만 FE 상태에서 제거
       setTodoList((prev) => prev.filter((todo) => todo.id !== todoId));
-
       console.log('삭제 완료:', todoId);
     } catch (error) {
-      console.error('삭제 실패:', error);
+      console.error('삭제 실패, 상태는 유지:', error);
     }
   };
 

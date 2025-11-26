@@ -72,12 +72,16 @@ export const getTodos = async () => {
 // delete = 삭제
 export const delTodo = async (todoId: number) => {
   try {
-    // DELETE 요청: /todos/{id} 형태로 서버에 요청
-    const response = await api.delete(`/todos/${todoId}`);
+    const token = localStorage.getItem('AccessToken'); // 새로고침 후 token 확보
+    const response = await api.delete(`/todos/${todoId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     console.log('삭제 성공:', response.data);
+    return response.data; // FE에서 필요하면 반환
   } catch (error) {
-    console.error('삭제 실패:', error);
+    console.error('삭제 실패:', error.response?.data || error.message);
+    throw error; // 에러 던져서 handleDel에서 잡을 수 있게
   }
 };
 
