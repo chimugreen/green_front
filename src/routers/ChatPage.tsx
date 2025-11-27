@@ -3,11 +3,10 @@
 const ChatPage = () => {
   return (
     <>
-      <div>DM</div>
       <div className="flex items-center justify-center">
         <div
           className="flex flex-row items-center justify-start
-         p-1 w-180 min-w-2 h-180"
+         p-1 w-180 min-w-2 h-auto"
         >
           <div className="flex flex-row">
             <p className="flex m-1 p-2 border-2 rounded-2xl flex-row bg-white">
