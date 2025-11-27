@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { apiWithHeader } from '../api/api';
+import { apiWithHeader } from '../components/api';
 
 interface User {
   name: string;
