@@ -1,7 +1,11 @@
 // 투두 fe be 연동
 import axios from 'axios';
+import { data } from 'react-router-dom';
+import type { Todo, TodoResponse } from '../routers/FeedPage';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
-//
 const api = axios.create({
   baseURL: 'http://192.168.0.10:8080/',
 });
@@ -14,13 +18,14 @@ export const addTodo = async (
   schedule: Date,
   isDone: boolean
 ) => {
+  console.log(schedule + '11123');
   try {
     const token = localStorage.getItem('AccessToken');
     const response = await api.post(
       '/todos',
       {
         content,
-        schedule: schedule.toISOString().split('T')[0],
+        schedule: schedule,
         isDone,
       },
       {
@@ -35,16 +40,16 @@ export const addTodo = async (
     return {
       id: data.id,
       content: data.content,
-      schedule: data.schedule ? new Date(data.schedule) : new Date(),
+      schedule: data.schedule,
       isDone: data.done,
     };
   } catch (error) {
-    console.log('추가 실패', error.response?.data || error.message);
+    console.log('추가 실패');
   }
 };
 
 // get = 조회
-export const getTodos = async () => {
+export const getTodos = async (): Promise<Todo[]> => {
   try {
     const token = localStorage.getItem('AccessToken'); // <-- 여기서 가져오기
     const response = await api.get('/todos', {
@@ -54,13 +59,21 @@ export const getTodos = async () => {
     });
 
     const list = response.data;
+    const convertedList = list.map((item: TodoResponse) => {
+      const utcDate = new Date(item.schedule); // UTC 기준
+      const koreaDate = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000); // 9시간 더함
 
-    const convertedList = list.map((item: any) => ({
-      id: item.id,
-      content: item.content,
-      schedule: item.schedule ? new Date(item.schedule) : new Date(), // 기본값 오늘
-      isDone: item.done,
-    }));
+      return {
+        id: item.id,
+        content: item.content,
+        schedule: koreaDate,
+        isDone: item.done,
+      };
+    });
+    console.log('before');
+    console.log(list);
+    console.log('after');
+    console.log(convertedList);
 
     return convertedList;
   } catch (error) {
@@ -80,7 +93,7 @@ export const delTodo = async (todoId: number) => {
     console.log('삭제 성공:', response.data);
     return response.data; // FE에서 필요하면 반환
   } catch (error) {
-    console.error('삭제 실패:', error.response?.data || error.message);
+    console.error('삭제 실패:');
     throw error; // 에러 던져서 handleDel에서 잡을 수 있게
   }
 };

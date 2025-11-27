@@ -60,23 +60,16 @@ const FeedPage = () => {
       const response = await addTodo(trimmed, selectedDate, false);
       if (!response) return;
 
-      // 서버 응답 → FE 타입 변환
+      // // 서버 응답 → FE 타입 변환
       const newTodo: Todo = {
         id: response.id,
         content: response.content,
         // parseDate 사용 → 시간대 문제 해결
-        schedule:
-          typeof response.schedule === 'string'
-            ? parseDate(response.schedule, selectedDate)
-            : new Date(
-                selectedDate.getFullYear(),
-                selectedDate.getMonth(),
-                selectedDate.getDate()
-              ),
+        schedule: selectedDate,
         isDone: typeof response.isDone === 'boolean' ? response.isDone : false,
       };
 
-      // 상태에 추가 → 바로 화면에 반영
+      // // 상태에 추가 → 바로 화면에 반영
       setTodoList((prev) => [...prev, newTodo]);
       setInputText('');
       console.log('추가 완료:', newTodo);
@@ -112,15 +105,7 @@ const FeedPage = () => {
       try {
         const data = await getTodos();
 
-        const parsed = data.map((todo: any) => ({
-          id: todo.id,
-          content: todo.content,
-          // parseDate 사용 → GET 시에도 시간대 문제 제거
-          schedule: parseDate(todo.schedule, new Date()),
-          isDone: typeof todo.isDone === 'boolean' ? todo.isDone : false,
-        }));
-
-        setTodoList(parsed);
+        setTodoList(data);
       } catch (e) {
         console.log('서버에서 todo 로드 실패:', e);
       }
