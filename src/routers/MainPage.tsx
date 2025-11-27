@@ -144,15 +144,12 @@ const FeedPage = () => {
 
   return (
     <>
-      <header className="flex">
-        <img
-          className="ml-10 mt-5 mb-10 size-10"
-          src="src\img\icon.png"
-          alt="mainLogo"
-        />
+      <header className="flex justify-center items-center gap-2 py-5">
+        <img className="size-10" src="src/img/icon.png" alt="mainLogo" />
+        <p className="text-lg font-semibold">Make Plan</p>
       </header>
-      <div className="flex justify-around items-center h-full ">
-        <div className="w-1/3 min-h-100 h-auto flex flex-col rounded-2xl">
+      <div className="flex justify-center items-center h-full px-6 gap-6">
+        <div className="w-auto min-h-100 h-auto flex flex-col rounded-2xl">
           <div>
             <Calender
               selectedDate={selectedDate}
@@ -162,7 +159,10 @@ const FeedPage = () => {
           </div>
         </div>
 
-        <div className="w-1/2 max-h-150 min-h-100 h-auto flex flex-col p-2 bg-neutral-50 rounded-2xl">
+        <div
+          className="w-1/3 max-h-150 min-h-100 h-auto flex flex-col p-2
+      "
+        >
           <Category
             inputText={inputText} // 추가내용
             setInputText={setInputText} // 추가내용
