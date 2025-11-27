@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Todo } from '../routers/FeedPage';
+import type { Todo } from '../routers/MainPage';
 
 // FeedPage.tsx에서 정의한 props 함수의 타입 선언
 interface CalendarProps {

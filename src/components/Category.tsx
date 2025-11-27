@@ -1,7 +1,7 @@
 // Category
 // 투두리스트
 
-import type { Todo } from '../routers/FeedPage';
+import type { Todo } from '../routers/MainPage';
 
 // Category props 타입 정의
 interface CategoryProps {

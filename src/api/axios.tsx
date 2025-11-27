@@ -1,6 +1,6 @@
 // 투두 fe be 연동
 import axios from 'axios';
-import type { Todo, TodoResponse } from '../routers/FeedPage';
+import type { Todo, TodoResponse } from '../routers/MainPage';
 
 const api = axios.create({
   baseURL: 'http://192.168.0.10:8080/',
