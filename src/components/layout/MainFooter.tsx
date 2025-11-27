@@ -1,4 +1,6 @@
-import { VscAccount, VscSearch, VscBell } from 'react-icons/vsc';
+import { VscAccount, VscSearch } from 'react-icons/vsc';
+import { FiMessageCircle } from 'react-icons/fi';
+
 import { IoHomeOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 // import { userInfoStorage } from '../../utils/userInfoStorage';
@@ -31,8 +33,8 @@ export const MainFooter = () => {
            items-center text-gray-700 font-bold"
           onClick={() => navigate('/alert')}
         >
-          <VscBell />
-          알림
+          <FiMessageCircle />
+          메세지
         </button>
         <button
           className="cursor-pointer flex flex-col

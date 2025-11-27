@@ -3,13 +3,13 @@ import './index.css'; // ✅ Tailwind import
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MyPage from './routers/MyPage';
 import SearchPage from './routers/SearchPage';
-import FeedPage from './routers/FeedPage';
-import AlertPage from './routers/AlertPage';
+import MainPage from './routers/MainPage';
 import { Layout } from './components/layout/Layout';
 import MainLoginPage from './loginPage/MainLoginPage';
 import LoginPage from './loginPage/LoginPage';
 import SignupPage from './loginPage/SignupPage';
 import CreatePost from './routers/pages/post/createPost/CreatePost';
+import ChatPage from './routers/ChatPage';
 
 const router = createBrowserRouter([
   
@@ -21,9 +21,9 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       // 로그인 후 메인 페이지
-      { path: '/todocalendar', element: <FeedPage /> },
+      { path: '/todocalendar', element: <MainPage /> },
       { path: '/postfeed', element: <SearchPage /> },
-      { path: '/alert', element: <AlertPage /> },
+      { path: '/alert', element: <ChatPage /> },
       { path: '/user/my', element: <MyPage /> },
       // 추가 페이지
       { path: '/createpost', element: <CreatePost /> },

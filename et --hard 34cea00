@@ -1,0 +1,55 @@
+[33m939c552[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdev[m[33m, [m[1;31morigin/feat_axiosTest[m[33m, [m[1;32mfeat_axiosTest[m[33m)[m feat:수정기능
+[33m5e632cb[m feat. utc+9 보정
+[33m348c834[m chore 수정중
+[33m3489cf4[m feat:삭제기능
+[33m34cea00[m 새로고침해도 보임
+[33me192546[m get 수정중
+[33m86c2ce7[m chore:del 버튼
+[33mbe6c2f5[m feat: axios 연동 테스트중
+[33mbc29145[m chore: date > schedule로 be와 이름 통일
+[33mcb48f12[m chore: isFinished isDone로 이름 변경
+[33m9430b9b[m feat.index todo.id로 수정
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m 테스트 컴포넌트 삭제
+[33m4656699[m feat. css변경
+[33ma339def[m feat. 달력 todolist 갯수 확인가능 기능
+[33mafa5246[m feat.완료표시체크
+[33m1339978[m feat. 날짜별로 todo 저장
+[33mf58930a[m feat: todo 배열만듬
+[33md835f23[m feat. Calender tsx props
+[33mcf7af92[m Merge pull request #9 from chimugreen/feat_axios
+[33m9cc79d4[m 팔로우 버튼 고침
+[33mcb58dca[m 메인페이지 라우터로 변경
+[33ma5a85a0[m Mypage 및 EachUser 'userId'에 맞는 사용자 불러오기 구현
+[33m05f2e97[m mypage axios 연결
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m Merge pull request #8 from chimugreen/feat_Category
+[33mf217eb1[m Merge pull request #7 from chimugreen/feat_calender
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m feat: todo crud
+[33mc41647d[m 게시물 컴포넌트 및 개인 페이지 구현
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m chore: 클릭 이벤트 함수 이름 수정
+[33m27bf037[m feat: 날짜 클릭 시 하이라이트
+[33mcf8cae1[m css 수정
+[33mca28269[m feat: css 수정
+[33mcab7c57[m feat: 달력 정렬 수정
+[33m4cf47f0[m feat: 달력 버튼 클릭시 달력 렌더링 변경 추가
+[33m1ef3671[m fear:버튼 클릭 시, 달력의 현재 월이 변경(캘린더 내부는 x)
+[33me8cc038[m feat: 당월 달력 기능 구현
+[33mf8b9683[m chore: 캘린더 컴포넌트 1개로 통합
+[33md8c5d59[m Merge pull request #5 from chimugreen/docs_Main_Screen
+[33m6e434aa[m feat: 달력 css 맞춤
+[33m5de349b[m 메인로그인 컴포넌트 분리 및 네이밍 변경
+[33mfed761a[m feat: 달력 진행중
+[33mafdcb95[m[33m ([m[1;31morigin/docs_Main_Screen[m[33m, [m[1;32mdocs_Main_Screen[m[33m)[m chore: page 컴포넌트 이름 알기쉽게 변경
+[33mfc75f49[m chore: 컴포넌트 이름 알기 쉽게 변경
+[33m8b80481[m[33m ([m[1;31morigin/MainScreen_Conflict_fixed[m[33m)[m 병합 충돌 해결
+[33mf39d06e[m feat: App.tsx에서 MainPage로 분할
+[33m8acfae5[m 메인 UI 수정
+[33m2587a2f[m[33m ([m[1;32mmerge[m[33m)[m Merge pull request #2 from chimugreen/Feat_signup
+[33m33f1c42[m[33m ([m[1;31morigin/Feat_signup[m[33m)[m resolve: merge conflict
+[33mbe88e64[m Merge remote-tracking branch 'origin/dev' into Feat_signup
+[33m24a5f59[m 로그인 및 회원가입 화면 구현
+[33m718b504[m feat: 홈페이지 ui기본틀
+[33m1d3fee2[m dev 브랜치
+[33m3dc6526[m[33m ([m[1;32mmain[m[33m)[m 병합
+[33m3fb1139[m make paln
+[33mc6866a3[m 기능 구현 templates
+[33m7354448[m 기능 구현 templates
