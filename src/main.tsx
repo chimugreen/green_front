@@ -3,7 +3,7 @@ import './index.css'; // ✅ Tailwind import
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MyPage from './routers/MyPage';
 import SearchPage from './routers/SearchPage';
-import FeedPage from './routers/FeedPage';
+import FeedPage from './routers/MainPage';
 import AlertPage from './routers/AlertPage';
 import { Layout } from './components/layout/Layout';
 import MainLoginPage from './loginPage/MainLoginPage';
