@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Calender from '../components/Calender';
 import Category from '../components/Category';
-import { addTodo, delTodo, getTodos } from '../api/axios';
+import { addTodo, delTodo, getTodos, updateTodo } from '../api/axios';
 
 export type Todo = {
   id: number; // 할일 번호
@@ -90,13 +90,24 @@ const FeedPage = () => {
     }
   };
 
-  // 수정버튼
-  const handleUpdate = (indexToUpdate: number, newText: string) => {
-    setTodoList(
-      todoList.map((todo) =>
-        todo.id === indexToUpdate ? { ...todo, content: newText } : todo
-      )
-    );
+  // 수정
+  const handleUpdate = async (todoId: number, newText: string) => {
+    try {
+      const target = todoList.find((t) => t.id === todoId);
+      if (!target) return;
+
+      // 서버에 PUT 요청 = 수정
+      await updateTodo(todoId, newText, target.schedule, target.isDone);
+
+      // 프론트 상태 업데이트 (화면 반영)
+      setTodoList((prev) =>
+        prev.map((todo) =>
+          todo.id === todoId ? { ...todo, content: newText } : todo
+        )
+      );
+    } catch (err) {
+      console.error('수정 실패:', err);
+    }
   };
 
   // 서버에서 todo 불러오기

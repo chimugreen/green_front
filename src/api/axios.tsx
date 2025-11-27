@@ -1,10 +1,6 @@
 // 투두 fe be 연동
 import axios from 'axios';
-import { data } from 'react-router-dom';
 import type { Todo, TodoResponse } from '../routers/FeedPage';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 
 const api = axios.create({
   baseURL: 'http://192.168.0.10:8080/',
@@ -98,14 +94,34 @@ export const delTodo = async (todoId: number) => {
   }
 };
 
-// // put = 수정
-// const putTodo = async () => {
-//     try {
-//         const response = await api.put(, {
+// put = 수정
+export const updateTodo = async (
+  id: number,
+  content: string,
+  schedule: Date,
+  isDone: boolean
+) => {
+  try {
+    const token = localStorage.getItem('AccessToken');
 
-//         })
-//         console.log("수정 성공");
-//     } catch (error) {
-//         console.log("수정 실패");
-//     }
-// }
+    const response = await api.put(
+      `/todos/${id}`,
+      {
+        content,
+        schedule, // Date 객체 그대로 보내면 됨 (서버에서 자동으로 string 변환됨)
+        isDone,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log('수정 성공', response.data);
+    return response.data;
+  } catch (error) {
+    console.log('수정 실패', error);
+    throw error;
+  }
+};
