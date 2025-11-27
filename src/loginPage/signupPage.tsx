@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../components/api';
+import { api } from '../api/api';
 
 type User = {
   id?: number;

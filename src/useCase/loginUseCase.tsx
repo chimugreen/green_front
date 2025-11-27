@@ -1,4 +1,4 @@
-import { api } from '../components/api';
+import { api } from '../api/api';
 import { tokenManager } from '../utils/tokenManager';
 import { userInfoStorage } from '../utils/userInfoStorage';
 

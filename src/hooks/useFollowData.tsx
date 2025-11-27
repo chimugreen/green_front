@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { apiWithHeader } from '../components/api';
+import { apiWithHeader } from '../api/api';
 
 type User = {
   userId: number;

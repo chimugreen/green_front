@@ -11,6 +11,7 @@ import FollowingList from '../userPage/FollowingList';
 import { useUserId } from '../useCase/useUserId';
 import { apiWithHeader } from './api';
 import { userInfoStorage } from '../utils/userInfoStorage';
+// import { apiWithHeader } from '../api/api';
 
 interface EachUserProps {
   userId: number;
