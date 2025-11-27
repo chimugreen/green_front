@@ -8,7 +8,7 @@ export const MainFooter = () => {
   const myId = userInfoStorage.getUserId();
 
   return (
-    <footer className="absolute bottom-3 w-full overflow-hidden">
+    <footer>
       <div className="flex justify-center gap-10">
         <button
           className="cursor-pointer flex flex-col

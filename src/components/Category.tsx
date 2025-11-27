@@ -1,14 +1,16 @@
 // Category
 // 투두리스트
 
+import type { Todo } from '../routers/FeedPage';
+
 // Category props 타입 정의
 interface CategoryProps {
   inputText: string;
   setInputText: React.Dispatch<React.SetStateAction<string>>;
   todoList: Todo[];
   handleAdd: () => void;
-  handleDel: (index: number) => void;
-  handleUpdate: (index: number, newText: string) => void;
+  handleDel: (id: number) => void;
+  handleUpdate: (id: number, newText: string) => void;
   editText: string;
   setEditText: React.Dispatch<React.SetStateAction<string>>;
   editIndex: number | null;
@@ -55,22 +57,20 @@ const Category = ({
       <div>
         <ul className="bg-amber-50 rounded-2xl">
           {/* todolist 배열 map으로 렌더링 */}
-          {todoList.map((todo, index) => (
+          {todoList.map((todo) => (
             <li
               className="flex gap-2 m-1 justify-between items-center"
-              key={index}
+              key={todo.id}
             >
               <div className="flex gap-2 m-1 justify-between items-center">
                 <img className="size-5" src="./src/img/icon.png" alt="아이콘" />
                 <input
                   type="checkbox"
-                  checked={todo.isFinished}
+                  checked={todo.isDone}
                   onChange={() => handleToggleFinished(todo.id)}
                 />
                 <span
-                  className={
-                    todo.isFinished ? 'line-through text-gray-400' : ''
-                  }
+                  className={todo.isDone ? 'line-through text-gray-400' : ''}
                 >
                   {todo.content}
                 </span>
@@ -80,16 +80,16 @@ const Category = ({
                 className="flex items-center gap-2
                "
               >
-                {editIndex === index ? (
+                {editIndex === todo.id ? (
                   <>
                     <input
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
-                      className="border rounded p-1"
+                      className="border rounded p-1 bg-white"
                     />
                     <button
                       onClick={() => {
-                        handleUpdate(index, editText);
+                        handleUpdate(todo.id, editText);
                         setEditIndex(null);
                         setEditText('');
                       }}
@@ -100,8 +100,9 @@ const Category = ({
                 ) : (
                   <>
                     <button
+                      className="cursor-pointer hover:bg-gray-100 rounded-2xl p-1"
                       onClick={() => {
-                        setEditIndex(index);
+                        setEditIndex(todo.id);
                         setEditText(todo.content);
                       }}
                     >
@@ -111,7 +112,7 @@ const Category = ({
                 )}
 
                 <button
-                  onClick={() => handleDel(index)}
+                  onClick={() => handleDel(todo.id)}
                   className="cursor-pointer hover:bg-gray-100 rounded-2xl p-1"
                 >
                   삭제

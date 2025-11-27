@@ -1,0 +1,80 @@
+[33m34cea00[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdev[m[33m)[m HEAD@{0}: reset: moving to 34cea00
+[33m939c552[m[33m ([m[1;31morigin/feat_axiosTest[m[33m, [m[1;32mfeat_axiosTest[m[33m)[m HEAD@{1}: merge feat_axiosTest: Fast-forward
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m HEAD@{2}: checkout: moving from feat_axiosTest to dev
+[33m939c552[m[33m ([m[1;31morigin/feat_axiosTest[m[33m, [m[1;32mfeat_axiosTest[m[33m)[m HEAD@{3}: commit: feat:수정기능
+[33m5e632cb[m HEAD@{4}: commit: feat. utc+9 보정
+[33m348c834[m HEAD@{5}: reset: moving to 348c834b97ca5ce1a6afc0f920e02618b20e4053
+[33m348c834[m HEAD@{6}: reset: moving to 348c834b97ca5ce1a6afc0f920e02618b20e4053
+[33m348c834[m HEAD@{7}: reset: moving to 348c834b97ca5ce1a6afc0f920e02618b20e4053
+[33m348c834[m HEAD@{8}: reset: moving to 348c834b97ca5ce1a6afc0f920e02618b20e4053
+[33m348c834[m HEAD@{9}: reset: moving to 348c834b97ca5ce1a6afc0f920e02618b20e4053
+[33m348c834[m HEAD@{10}: commit: chore 수정중
+[33m3489cf4[m HEAD@{11}: reset: moving to 3489cf4c9ace54a505b915fe25daa4e077b61ca9
+[33m3489cf4[m HEAD@{12}: commit: feat:삭제기능
+[33m34cea00[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdev[m[33m)[m HEAD@{13}: commit: 새로고침해도 보임
+[33me192546[m HEAD@{14}: commit: get 수정중
+[33m86c2ce7[m HEAD@{15}: commit: chore:del 버튼
+[33mbe6c2f5[m HEAD@{16}: reset: moving to be6c2f59202c1835a2a9cdcbd01f49c4939b1ef4
+[33m45f2879[m HEAD@{17}: commit: feat:put
+[33m80ce2f4[m HEAD@{18}: commit: 수정중
+[33mbe6c2f5[m HEAD@{19}: commit: feat: axios 연동 테스트중
+[33mbc29145[m HEAD@{20}: commit: chore: date > schedule로 be와 이름 통일
+[33mcb48f12[m HEAD@{21}: commit: chore: isFinished isDone로 이름 변경
+[33m9430b9b[m HEAD@{22}: commit: feat.index todo.id로 수정
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m HEAD@{23}: checkout: moving from dev to feat_axiosTest
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m HEAD@{24}: checkout: moving from feat_axiosTest to dev
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m HEAD@{25}: checkout: moving from dev to feat_axiosTest
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m HEAD@{26}: merge feat_testBranch: Fast-forward
+[33mcf7af92[m HEAD@{27}: checkout: moving from feat_testBranch to dev
+[33m1fb2baf[m[33m ([m[1;31morigin/feat_testBranch[m[33m, [m[1;32mfeat_testBranch[m[33m)[m HEAD@{28}: commit: 테스트 컴포넌트 삭제
+[33m4656699[m HEAD@{29}: commit: feat. css변경
+[33ma339def[m HEAD@{30}: commit: feat. 달력 todolist 갯수 확인가능 기능
+[33mafa5246[m HEAD@{31}: commit: feat.완료표시체크
+[33m1339978[m HEAD@{32}: commit: feat. 날짜별로 todo 저장
+[33mf58930a[m HEAD@{33}: commit: feat: todo 배열만듬
+[33md835f23[m HEAD@{34}: commit: feat. Calender tsx props
+[33mcf7af92[m HEAD@{35}: checkout: moving from dev to feat_testBranch
+[33mcf7af92[m HEAD@{36}: pull origin dev: Fast-forward
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{37}: checkout: moving from feat_Category to dev
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m HEAD@{38}: checkout: moving from feat_calender_axios to feat_Category
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{39}: checkout: moving from feat_calender_axios to feat_calender_axios
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{40}: checkout: moving from feat_Category to feat_calender_axios
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m HEAD@{41}: checkout: moving from feat_calender_axios to feat_Category
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{42}: checkout: moving from feat_calender_axios to feat_calender_axios
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{43}: checkout: moving from dev to feat_calender_axios
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{44}: checkout: moving from feat_Category to dev
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m HEAD@{45}: checkout: moving from feat_calender_axios to feat_Category
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{46}: checkout: moving from feat_Category to feat_calender_axios
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m HEAD@{47}: checkout: moving from feat_calender_axios to feat_Category
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{48}: reset: moving to HEAD
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{49}: checkout: moving from dev to feat_calender_axios
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{50}: checkout: moving from feat_Category to dev
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m HEAD@{51}: checkout: moving from dev to feat_Category
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{52}: checkout: moving from feat_Category to dev
+[33m1fe58f2[m[33m ([m[1;32mfeat_Category[m[33m)[m HEAD@{53}: pull origin dev: Fast-forward
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{54}: reset: moving to HEAD
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{55}: checkout: moving from dev to feat_Category
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{56}: merge feat_Category: Fast-forward
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{57}: checkout: moving from docs_Main_Screen to dev
+[33mafdcb95[m[33m ([m[1;31morigin/docs_Main_Screen[m[33m, [m[1;32mdocs_Main_Screen[m[33m)[m HEAD@{58}: checkout: moving from dev to docs_Main_Screen
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{59}: checkout: moving from feat_calender to dev
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{60}: checkout: moving from feat_Category to feat_calender
+[33m28d1da4[m[33m ([m[1;31morigin/feat_Category[m[33m)[m HEAD@{61}: commit: feat: todo crud
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{62}: checkout: moving from dev to feat_Category
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{63}: checkout: moving from feat_calender to dev
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{64}: checkout: moving from feat_Category to feat_calender
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{65}: checkout: moving from dev to feat_Category
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{66}: merge feat_calender: Fast-forward
+[33m2587a2f[m[33m ([m[1;32mmerge[m[33m)[m HEAD@{67}: checkout: moving from feat_calender to dev
+[33mceb6b2f[m[33m ([m[1;31morigin/feat_calender[m[33m, [m[1;32mfeat_calender[m[33m)[m HEAD@{68}: commit: chore: 클릭 이벤트 함수 이름 수정
+[33m27bf037[m HEAD@{69}: commit: feat: 날짜 클릭 시 하이라이트
+[33mcf8cae1[m HEAD@{70}: commit: css 수정
+[33mca28269[m HEAD@{71}: commit: feat: css 수정
+[33mcab7c57[m HEAD@{72}: commit: feat: 달력 정렬 수정
+[33m4cf47f0[m HEAD@{73}: commit: feat: 달력 버튼 클릭시 달력 렌더링 변경 추가
+[33m1ef3671[m HEAD@{74}: commit: fear:버튼 클릭 시, 달력의 현재 월이 변경(캘린더 내부는 x)
+[33me8cc038[m HEAD@{75}: commit: feat: 당월 달력 기능 구현
+[33mf8b9683[m HEAD@{76}: commit: chore: 캘린더 컴포넌트 1개로 통합
+[33m6e434aa[m HEAD@{77}: commit: feat: 달력 css 맞춤
+[33mfed761a[m HEAD@{78}: commit: feat: 달력 진행중
+[33mafdcb95[m[33m ([m[1;31morigin/docs_Main_Screen[
