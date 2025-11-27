@@ -1,9 +1,9 @@
 // import EachPost from '../../../../../components/EachPost';
 
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import type { Pagenation, Post } from '../../../../../useCase/useGetPost';
 import React, { useEffect, useRef } from 'react';
-import { type PostData } from '../../../../../components/post/EachPost';
+// import { type PostData } from '../../../../../components/post/EachPost';
 
 type PostListProps = {
   posts: Post[];
@@ -12,8 +12,9 @@ type PostListProps = {
 };
 
 export const PostList = ({ posts, pagenation, setPage }: PostListProps) => {
+
   const sentinelRef = useRef<HTMLDivElement | null>(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!sentinelRef.current) return;
@@ -39,7 +40,7 @@ export const PostList = ({ posts, pagenation, setPage }: PostListProps) => {
     return () => {
       observer.disconnect();
     };
-  }, [pagenation?.hasNext]);
+  }, [pagenation?.hasNext, setPage]);
   return (
     <div>
       <div className="grid grid-cols-3">
@@ -48,14 +49,16 @@ export const PostList = ({ posts, pagenation, setPage }: PostListProps) => {
             key={post.id}
             className="aspect-square border-2 border-white cursor-pointer"
             src={post.imageUrl}
-            // onClick={() => navigate(`/post/${post.id}`)}
+            onClick={() => navigate(`/post/user/${post.id}`)}
           />
         ))}
       </div>
       {/* 무한 스크롤 트리거 */}
       <div ref={sentinelRef}></div>
       {/* 마지막 페이지 표시 */}
-      {!pagenation?.hasNext && posts.length > 0 && <p className='text-center text-gray-400 p-5'>마지막 게시글입니다.</p>}
+      {!pagenation?.hasNext && posts.length > 9 && (
+        <p className="text-center text-gray-400 p-5">마지막 게시글입니다.</p>
+      )}
     </div>
   );
 };

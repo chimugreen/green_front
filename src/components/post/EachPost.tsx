@@ -5,7 +5,8 @@ import { CgComment } from 'react-icons/cg';
 import CommentModal from '../CommentModal';
 import type { Post } from '../../useCase/useGetPost';
 import { useUserId } from '../../useCase/useUserId';
-import logo from '../../img/icon.png';
+import logo from '../../components/image/icon.png';
+import { useGetComment } from '../../useCase/useGetComment';
 
 export type PostData = {
   user: {
@@ -22,6 +23,21 @@ export type PostData = {
   };
 };
 
+export type Comment = {
+  user: {
+    name: string;
+    profileImageUrl: string;
+  };
+  comment: {
+    id: number;
+    userId: number;
+    username: string;
+    profileImageUrl: string;
+    content: string;
+    createdAt: Date;
+  };
+};
+
 type EachPostDataProps = {
   postData: PostData;
 };
@@ -34,24 +50,31 @@ type EachPostDataProps = {
 export const EachPost = ({ postData }: EachPostDataProps) => {
   const { userId } = useParams<{ userId: string }>();
   const { setLoadedUserData, loadedUserData, isLoading } = useUserId(userId);
+  const { comments, cmtPagenation, refetch: loadCmts } = useGetComment({
+    postId: postData.post.id,
+    page: 0,
+    size: 10,
+  });
+  console.log('postData?', postData);
   // 댓글창, 댓글, 좋아요
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
-  const [comment, setComment] = useState('');
-  const [comments, setComments] = useState<string[]>([]);
+  // const [comment, setComment] = useState('');
+  // const [comments, setComments] = useState<string[]>([]);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
 
   // 댓글 목록 열기
   const handleCommentList = () => {
     setModalOpen(true);
+    loadCmts();
   };
-  // 댓글 추가 기능
-  const handleCommentPost = () => {
-    if (!comment.trim()) return;
-    setComments((prev) => [...prev, comment]);
-    setComment('');
-  };
+  // // 댓글 추가 기능
+  // const handleCommentPost = () => {
+  //   if (!comment.trim()) return;
+  //   setComments((prev) => [...prev, comment]);
+  //   setComment('');
+  // };
 
   // 좋아요 기능
   const handleLike = () => {
@@ -96,27 +119,29 @@ export const EachPost = ({ postData }: EachPostDataProps) => {
           <input
             className="text-start py-0.5"
             placeholder="댓글 달기..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            // value={comment}
+            // onChange={(e) => setComment(e.target.value)}
           />
           <button
             className="float-right px-1.5 py-0.5 rounded-md cursor-pointer bg-red-200 text-white"
-            onClick={handleCommentPost}
-            disabled={!comment.trim()}
+            // onClick={handleCommentPost}
+            // disabled={!comment.trim()}
           >
             게시
           </button>
         </div>
         <CommentModal open={modalOpen} onClose={() => setModalOpen(false)}>
-          <div className="">
-            <div>
-              <p className="font-bold text-center w-full p-3">댓글</p>
-              <div className="w-full my-2 p-3 rounded-md bg-white">
-                <div className="flex">
-                  <img src={logo} />
-                  <p>닉네임</p>
-                  <p>코멘트</p>
-                </div>
+          <div>
+            <p className="font-bold text-center w-full p-3">댓글</p>
+            <div className="w-full my-2 p-3 rounded-md bg-white">
+              <div className="flex">
+                {comments.map((cmt) => (
+                  <div key={cmt.id}>
+                    <img src={cmt.profileImageUrl} alt="프로필 사진" />
+                    <p>{cmt.username}</p>
+                    <p>{cmt.content}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

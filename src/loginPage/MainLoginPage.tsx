@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import logo from '../img/icon.png';
+import logo from '../components/image/icon.png';
 import { useState } from 'react';
 import MainAppModal from '../components/MainAppModal';
-// import MainPage from '../routers/MainPage';
 
 const MainLoginPage = () => {
   const navigate = useNavigate();

@@ -1,26 +1,23 @@
-// import React, { useState } from 'react';
-import logo from '../img/icon.png';
-import feedPic from '../img/feedpic.jpg';
-import fPic from '../img/f.jpg';
-import mala from '../img/mala.jpeg';
 import { SlArrowLeftCircle } from 'react-icons/sl';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import FollowerList from '../userPage/FollowerList';
 import FollowingList from '../userPage/FollowingList';
 import { useUserId } from '../useCase/useUserId';
 import { apiWithHeader } from './api';
 import { userInfoStorage } from '../utils/userInfoStorage';
 import { PostList } from '../routers/pages/post/createPost/components/PostList';
-import type { PostData } from './post/EachPost';
 import { useGetPost } from '../useCase/useGetPost';
 
-interface EachUserProps {
+type EachUserProps = {
   userId: number;
-}
+};
 
 // 개인 페이지
 const EachUser = ({ userId }: EachUserProps) => {
+  // const { userId } = useParams<{ userId: string }>();
+
+  const navigate = useNavigate();
   const loadUserId = Number(userId);
   const [page, setPage] = useState(0);
   const size = 10;
@@ -29,8 +26,6 @@ const EachUser = ({ userId }: EachUserProps) => {
     page,
     size,
   });
-
-  const navigate = useNavigate();
 
   const { setLoadedUserData, loadedUserData, isLoading } =
     useUserId(loadUserId);
@@ -105,6 +100,11 @@ const EachUser = ({ userId }: EachUserProps) => {
   };
 
   if (isLoading) return <p>로딩 중 ...</p>;
+
+  // if (!loadedUserData) {
+  //   alert('해당 ID의 유저가 없습니다.');
+  //   navigate(-1);
+  // }
 
   return (
     <div className="flex flex-col max-w-120 mx-auto my-2">
@@ -204,7 +204,7 @@ const EachUser = ({ userId }: EachUserProps) => {
       </div>
       {/* 사진 게시물 */}
       <div className="mt-4">
-        <PostList posts={posts} />
+        <PostList posts={posts} pagenation={pagenation} setPage={setPage} />
       </div>
       {/* 팔로잉&팔로워 리스트 */}
       <FollowerList

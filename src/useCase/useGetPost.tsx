@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { apiWithHeader } from '../components/api';
 
+// 유저 게시물 불러오기
 export type Post = {
   id: number;
   content: string;
