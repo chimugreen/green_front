@@ -14,7 +14,7 @@ export const InputPostContent = ({
 
   return (
     <div className="flex gap-3 p-3 bg-white rounded-md">
-      <SquareImageView imageUrl={imageUrl} />
+      <div className='size-90'><SquareImageView imageUrl={imageUrl} /></div>
       {/* 오른쪽: 게시글 내용 입력 */}
       <div className="flex flex-col gap-3">
         <textarea
@@ -23,7 +23,7 @@ export const InputPostContent = ({
           onChange={(e) => setContent(e.target.value)}
         />
         <div
-          className="bg-red-200 text-gray-500 px-4 py-2 rounded-md text-center"
+          className="bg-red-200 text-gray-500 px-4 py-2 rounded-md text-center cursor-pointer"
           onClick={() => onClickUpload(content)}
         >
           게시

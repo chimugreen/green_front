@@ -1,5 +1,5 @@
 import { MdOutlineAddToPhotos } from 'react-icons/md';
-import { use, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 type SelectPostImageProps = {
   onClickNext: (imageUrl: string, file: File) => void;
@@ -26,12 +26,12 @@ export const SelectPostImage = ({ onClickNext }: SelectPostImageProps) => {
   };
 
   return (
-    <div className="w-full max-w-[500px] bg-white rounded-md overflow-auto flex flex-col">
-      <div className="flex justify-center py-3 px-5">
-        <div>사진 선택</div>
+    <div className="w-full max-w-[400px] bg-white rounded-md overflow-auto flex flex-col">
+      <div className="flex justify-center p-5">
+        <div className='font-bold'>사진 선택</div>
       </div>
       {/* 이미지 선택 영역 */}
-      <div onClick={() => fileRef.current?.click()} className="flex-1 p-10">
+      <div onClick={() => fileRef.current?.click()} className="flex-1 px-10 pb-10">
         <div className="flex items-center justify-center aspect-square border-2 border-dashed border-gray-300 rounded-md overflow-hidden cursor-pointer">
           {preview ? (
             <img
@@ -48,7 +48,7 @@ export const SelectPostImage = ({ onClickNext }: SelectPostImageProps) => {
       {preview ? (
         <div
           onClick={handleNext}
-          className="bg-red-200 text-xl text-center m-3 rounded-md text-gray-600 cursor-pointer"
+          className="bg-red-200 text-xl text-center p-3 rounded-md text-gray-600 cursor-pointer"
         >
           다음
         </div>

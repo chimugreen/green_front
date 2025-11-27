@@ -4,6 +4,7 @@ import { apiWithHeader } from '../components/api';
 interface User {
   name: string;
   email: string;
+  profileImageUrl: string;
   postCount: number;
   followerCount: number;
   followingCount: number;

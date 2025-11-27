@@ -1,28 +1,31 @@
-// import React, { useState } from 'react';
-import logo from '../img/icon.png';
-import feedPic from '../img/feedpic.jpg';
-import fPic from '../img/f.jpg';
-import mala from '../img/mala.jpeg';
 import { SlArrowLeftCircle } from 'react-icons/sl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import FollowerList from '../userPage/FollowerList';
 import FollowingList from '../userPage/FollowingList';
 import { useUserId } from '../useCase/useUserId';
 import { apiWithHeader } from './api';
 import { userInfoStorage } from '../utils/userInfoStorage';
-// import { apiWithHeader } from '../api/api';
+import { PostList } from '../routers/pages/post/createPost/components/PostList';
+import { useGetPost } from '../useCase/useGetPost';
 
-interface EachUserProps {
+type EachUserProps = {
   userId: number;
-}
+};
 
 // 개인 페이지
 const EachUser = ({ userId }: EachUserProps) => {
-  const loadUserId = Number(userId);
-  // 임시 유저페이지 사진보여줌
-  const images = [feedPic, fPic, mala];
+  // const { userId } = useParams<{ userId: string }>();
+
   const navigate = useNavigate();
+  const loadUserId = Number(userId);
+  const [page, setPage] = useState(0);
+  const size = 10;
+  const { posts, pagenation } = useGetPost({
+    userId: Number(userId),
+    page,
+    size,
+  });
 
   const { setLoadedUserData, loadedUserData, isLoading } =
     useUserId(loadUserId);
@@ -40,7 +43,6 @@ const EachUser = ({ userId }: EachUserProps) => {
   const handleFollow = async () => {
     if (loadedUserData?.isFollowing) {
       // unfollow
-
       const res = await apiWithHeader.post(`user/unfollow`, {
         userId: loadUserId,
       });
@@ -57,11 +59,9 @@ const EachUser = ({ userId }: EachUserProps) => {
       }
     } else {
       // follow
-      // 팔로우 처리
       const res = await apiWithHeader.post(`user/follow`, {
         userId: loadUserId,
       });
-
       if (res.status == 200) {
         setLoadedUserData((pre) =>
           pre
@@ -101,6 +101,11 @@ const EachUser = ({ userId }: EachUserProps) => {
 
   if (isLoading) return <p>로딩 중 ...</p>;
 
+  // if (!loadedUserData) {
+  //   alert('해당 ID의 유저가 없습니다.');
+  //   navigate(-1);
+  // }
+
   return (
     <div className="flex flex-col max-w-120 mx-auto my-2">
       <div className="my-1 mx-auto max-w-120">
@@ -117,7 +122,7 @@ const EachUser = ({ userId }: EachUserProps) => {
       {/* 상단 회원 정보 */}
       <div className="flex max-w-120 items-center">
         <img
-          src={logo}
+          src={loadedUserData?.profileImageUrl}
           alt="프로필 사진"
           className="size-25 float-start mx-3"
         />
@@ -147,7 +152,8 @@ const EachUser = ({ userId }: EachUserProps) => {
           </div>
           <p className="text-gray-600 text-sm">{loadedUserData?.email}</p>
           <div className="flex text-sm py-0.5">
-            <p>게시물</p> <p className="font-bold px-1">{images.length}</p>
+            <p>게시물</p>{' '}
+            <p className="font-bold px-1">{loadedUserData?.postCount}</p>
             <p>팔로워</p>
             <p
               onClick={() => setIsOpenedFollowerList(true)}
@@ -197,16 +203,10 @@ const EachUser = ({ userId }: EachUserProps) => {
         </div>
       </div>
       {/* 사진 게시물 */}
-      <div className="grid grid-flow-row grid-cols-3 mt-3">
-        {images.map((c, idx) => (
-          <div key={idx}>
-            <img
-              src={c}
-              className="border border-gray-100 h-full object-cover rounded-xl cursor-pointer"
-            />
-          </div>
-        ))}
+      <div className="mt-4">
+        <PostList posts={posts} pagenation={pagenation} setPage={setPage} />
       </div>
+      {/* 팔로잉&팔로워 리스트 */}
       <FollowerList
         open={isOpenedFollowerList}
         onClose={() => setIsOpenedFollowerList(false)}

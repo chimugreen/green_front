@@ -12,6 +12,7 @@ import CreatePost from './routers/pages/post/createPost/CreatePost';
 import ChatPage from './routers/ChatPage';
 
 const router = createBrowserRouter([
+  
   // 로그인 전
   { path: '/', element: <MainLoginPage /> },
   { path: '/login', element: <LoginPage /> },
@@ -27,8 +28,7 @@ const router = createBrowserRouter([
       // 추가 페이지
       { path: '/createpost', element: <CreatePost /> },
       { path: '/user/:userId', element: <MyPage /> },
-      // 추가 페이지
-      { path: '/createpost', element: <CreatePost /> },
+      // { path: '/post/user/:postId', element: <EachPost  /> },
     ],
   },
 ]);
